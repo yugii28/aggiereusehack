@@ -28,7 +28,7 @@ export default function Checkout(){
                         <h1 className="asucd">ASUCD</h1>
                     </div>
                 </nav>
-                <button><h1 class="inspect-data">INSPECT <br></br>DATA</h1></button>
+                <button onClick = {() => navigate("/check-out-table")}><h1 class="inspect-data">INSPECT <br></br>DATA</h1></button>
                 </div>
                 <br></br>
                 <h1 className="add-header">DONATE ITEM</h1>

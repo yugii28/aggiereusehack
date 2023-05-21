@@ -12,7 +12,7 @@ const app = express()
 const db = mysql2.createConnection({
     host: "localhost",
     user: "root",
-    password: "matsukaze1",
+    password: "Dear4camera$",
     database: "test"
 })
 
@@ -32,6 +32,14 @@ app.get("/", (req, res) => {
 // if u do node index.js and go to localhost:8800/books you will see all the books from the sql database
 app.get("/books", (req, res) => {
     const q = "SELECT * FROM books"
+    db.query(q, (err, data) => {
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+})
+
+app.get("/checkintest", (req, res) => {
+    const q = "SELECT * FROM checkintest"
     db.query(q, (err, data) => {
         if(err) return res.json(err)
         return res.json(data)
@@ -78,6 +86,7 @@ app.post("/books", (req, res) => {
         return res.json("Book has been created successfully");
     })
 })
+
 
 app.post("/foottraffic", (req, res) => {
     const currentDate = new Date();
@@ -144,16 +153,23 @@ app.post("/checkin", (req, res) => {
     const currentDate = new Date();
     const day = currentDate.getDay()
     const hour = currentDate.getHours();
-    const q = "INSERT INTO checkin (`day`, `hour`, `category`) VALUES (?)";
+
+    const date = currentDate.getDate(); //20,21 etc
+    const month = currentDate.getMonth() + 1; //starts from 0 so add 1
+    const year = currentDate.getFullYear();
+    const fullDate = `${year}-${month}-${date}`;
+
+    const q = "INSERT INTO checkin (`day`, `hour`, `category`, `date`) VALUES (?)";
     const values = [
         day,
         hour,
-        req.body.t
+        req.body.t,
+        fullDate
     ]
     //you pass the query and the values, and it returns either an err or data
     db.query(q, [values], (err, data) => {
         if (err){
-            console.log(err)
+            // console.log(err)
             return res.json(err)
         }
         // if the book is created successfully, sql returns that back
@@ -165,11 +181,18 @@ app.post("/checkout", (req, res) => {
     const currentDate = new Date();
     const day = currentDate.getDay()
     const hour = currentDate.getHours();
-    const q = "INSERT INTO checkout (`day`, `hour`, `category`) VALUES (?)";
+
+    const date = currentDate.getDate(); //20,21 etc
+    const month = currentDate.getMonth() + 1; //starts from 0 so add 1
+    const year = currentDate.getFullYear();
+    const fullDate = `${year}-${month}-${date}`;
+
+    const q = "INSERT INTO checkout (`day`, `hour`, `category`, `date`) VALUES (?)";
     const values = [
         day,
         hour,
-        req.body.t
+        req.body.t,
+        fullDate
     ]
     //you pass the query and the values, and it returns either an err or data
     db.query(q, [values], (err, data) => {

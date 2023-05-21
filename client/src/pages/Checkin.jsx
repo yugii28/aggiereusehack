@@ -29,7 +29,7 @@ export default function CheckIn(){
                         <h1 className="asucd">ASUCD</h1>
                     </div>
                 </nav>
-                <button><h1 class="inspect-data">INSPECT <br></br>DATA</h1></button>
+                <button onClick = {() => navigate("/check-in-table")}><h1 class="inspect-data">INSPECT <br></br>DATA</h1></button>
                 </div>
                 <br></br>
                 <h1 className="add-header">ADD ITEM</h1>

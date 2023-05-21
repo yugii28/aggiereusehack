@@ -231,7 +231,7 @@ export default function FootTrafficTable(){
             return (
                 <div className= {{width: "90vw"}}>
                     <HighchartsReact highcharts={Highcharts} options={options} />
-                    <button onClick = {() => setmainmageshow(prev => !prev)}>Go back</button>
+                    <button onClick = {() => setmainmageshow(prev => !prev) && setIsHours(prev => !prev)}>Go back</button>
                 </div>
             )
         }else if(!mainpageshow && !isDays && isHours){
@@ -239,7 +239,7 @@ export default function FootTrafficTable(){
             return (
                 <div className= {{width: "90vw"}}>
                     <HighchartsReact highcharts={Highcharts} options={hoursOptions} />
-                    <button onClick = {() => setIsHours(prev => !prev)}>Go back</button>
+                    <button onClick = {() => setIsHours(prev => !prev) && setmainmageshow(prev => !prev) && setIsDays(prev => !prev)}>Go back</button>
                 </div>
             )
         }
