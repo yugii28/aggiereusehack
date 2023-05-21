@@ -8,6 +8,7 @@ import Add from './pages/Add';
 import Books from './pages/Books';
 import Update from './pages/Update';
 import CheckIn from './pages/Checkin';
+import CheckOut from './pages/Checkout'
 import "./style.css"
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           {/* how the user can create new data (book)- that is, sending data from react to be stored in the sql server */}
           <Route path = "/add" element = {<Add/>}/>
           <Route path = "/checkin" element = {<CheckIn/>}/>
+          <Route path = "/checkout" element = {<CheckOut/>}/>
           <Route path = "/update/:id" element = {<Update/>}/>
         </Routes>
       </BrowserRouter>

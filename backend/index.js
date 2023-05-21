@@ -54,6 +54,14 @@ app.get("/checkin", (req, res) => {
     })
 })
 
+app.get("/checkout", (req, res) => {
+    const q = "SELECT * FROM checkout"
+    db.query(q, (err, data) => {
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+})
+
 //creating new data using node- you can only test this using postman, which allows you to make api requests
 //in other words, writing the data to the database
 app.post("/books", (req, res) => {
@@ -85,7 +93,7 @@ app.post("/foottraffic", (req, res) => {
     db.query(q, [values], (err, data) => {
         if (err) return res.json(err)
         // if the book is created successfully, sql returns that back
-        return res.json("Book has been created successfully");
+        return res.json("foot traffic has been created successfully");
     })
 })
 
@@ -93,20 +101,44 @@ app.post("/checkin", (req, res) => {
     const currentDate = new Date();
     const day = currentDate.getDay()
     const hour = currentDate.getHours();
-
-    const q = "INSERT INTO checkin (`hour`, `day`, `category`) VALUES (?)";
+    const q = "INSERT INTO checkin (`day`, `hour`, `category`) VALUES (?)";
     const values = [
-        hour,
         day,
-        category
+        hour,
+        req.body.t
     ]
     //you pass the query and the values, and it returns either an err or data
     db.query(q, [values], (err, data) => {
-        if (err) return res.json(err)
+        if (err){
+            console.log(err)
+            return res.json(err)
+        }
         // if the book is created successfully, sql returns that back
-        return res.json("Book has been created successfully");
+        return res.json("check in has been created successfully");
     })
 })
+
+app.post("/checkout", (req, res) => {
+    const currentDate = new Date();
+    const day = currentDate.getDay()
+    const hour = currentDate.getHours();
+    const q = "INSERT INTO checkout (`day`, `hour`, `category`) VALUES (?)";
+    const values = [
+        day,
+        hour,
+        req.body.t
+    ]
+    //you pass the query and the values, and it returns either an err or data
+    db.query(q, [values], (err, data) => {
+        if (err){
+            console.log(err)
+            return res.json(err)
+        }
+        // if the book is created successfully, sql returns that back
+        return res.json("check out has been created successfully");
+    })
+})
+
 
 app.delete("/books/:id", (req, res) => {
     const bookId = req.params.id;

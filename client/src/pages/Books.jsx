@@ -35,15 +35,9 @@ const Books = () => {
         }
     }
 
-    const [book, setBook] = useState({
-        title : "charles",
-        desc: "darwin",
-        price: 2,
-    });
-
     const addFootTraffic = async e => {
         try{
-            await axios.post("http://localhost:8800/foottraffic", book)
+            await axios.post("http://localhost:8800/foottraffic")
         }catch(err){
            console.log(err);
         }
@@ -77,7 +71,11 @@ const Books = () => {
                 <h3>Check in</h3>
             </Link>        
         </button>
-        <button>Check Out</button>
+        <button>
+            <Link to = "/checkout">
+                <h3>Check out</h3>
+            </Link>        
+        </button>    
     </div>
   )
 }
