@@ -42,6 +42,7 @@ const Books = () => {
            console.log(err);
         }
     }
+    
   return (
     <div>
         <h1>Here is a list of all books you have added!</h1>
@@ -76,6 +77,11 @@ const Books = () => {
                 <h3>Check out</h3>
             </Link>        
         </button>    
+        <button>
+            <Link to = "/foot-traffic-table">
+                <h3>View foot traffic table</h3>
+            </Link>        
+        </button>   
     </div>
   )
 }

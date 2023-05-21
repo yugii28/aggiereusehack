@@ -9,6 +9,8 @@ import Books from './pages/Books';
 import Update from './pages/Update';
 import CheckIn from './pages/Checkin';
 import CheckOut from './pages/Checkout'
+import FootTrafficTable from './pages/FootTrafficTable';
+
 import "./style.css"
 
 function App() {
@@ -25,6 +27,7 @@ function App() {
           <Route path = "/add" element = {<Add/>}/>
           <Route path = "/checkin" element = {<CheckIn/>}/>
           <Route path = "/checkout" element = {<CheckOut/>}/>
+          <Route path = "/foot-traffic-table" element = {<FootTrafficTable/>}/>
           <Route path = "/update/:id" element = {<Update/>}/>
         </Routes>
       </BrowserRouter>

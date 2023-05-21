@@ -84,16 +84,36 @@ app.post("/foottraffic", (req, res) => {
     const day = currentDate.getDay()
     const hour = currentDate.getHours();
 
-    const q = "INSERT INTO foottraffic (`day`, `hour`) VALUES (?)";
+    const date = currentDate.getDate(); //20,21 etc
+    const month = currentDate.getMonth() + 1; //starts from 0 so add 1
+    const year = currentDate.getFullYear();
+    const fullDate = `${year}-${month}-${date}`;
+
+    const q = "INSERT INTO foottraffic (`day`, `hour`, `date`) VALUES (?)";
     const values = [
         day,
         hour,
+        fullDate
     ]
     //you pass the query and the values, and it returns either an err or data
     db.query(q, [values], (err, data) => {
-        if (err) return res.json(err)
+        if (err){
+            console.log(err)
+            res.json(err)
+        }
         // if the book is created successfully, sql returns that back
         return res.json("foot traffic has been created successfully");
+    })
+})
+
+app.get("/foottraffic/getallhours", (req, res) => {
+    const q = "SELECT COUNT(day),day FROM FootTraffic GROUP BY day"
+    db.query(q, (err, data) => {
+        if(err){
+            console.log(err)
+            return res.json(err)
+        }
+        return res.json(data)
     })
 })
 
