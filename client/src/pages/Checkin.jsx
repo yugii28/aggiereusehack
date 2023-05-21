@@ -2,10 +2,16 @@ import axios from 'axios'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css'
-
+import { useDisclosure } from '@mantine/hooks';
+import { Modal, useMantineTheme } from '@mantine/core';
+import { TextInput } from '@mantine/core';
+import { Button } from '@mantine/core';
 
 export default function CheckIn(){
     const navigate = useNavigate()
+    const [opened, { open, close }] = useDisclosure(false);
+    const theme = useMantineTheme();
+    const [form, setForm] = useState();
 
     async function addCheckIn(value) {
         const text = value;
@@ -18,8 +24,33 @@ export default function CheckIn(){
            console.log(err);
         }
     }
+
+    const handleCategory = () => {
+
+    }
     return (
         <div>
+                    <Modal
+                    opened={opened}
+                    onClose={close}
+                    title="Enter new category"
+                    overlayProps={{
+                    color: theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2],
+                    opacity: 0.55,
+                    blur: 3,
+                    }}
+                    >
+                    <form onSubmit = {() => addCheckIn(form)}>
+                    <TextInput
+                    placeholder="Your name"
+                    label="Full name"
+                    withAsterisk
+                    onChange={e => setForm(e.target.value)}
+                    />
+                    <br></br>
+                    <Button type = "submit" variant="gradient" gradient={{ from: 'teal', to: 'lime', deg: 105 }}>Lime green</Button>
+                    </form>
+                </Modal>
             <div class="main-body">
                 <div class="navbar-alpha">
                 <nav onClick = {() => navigate("/")} className="navbar">
@@ -93,7 +124,7 @@ export default function CheckIn(){
                     <img src="sunglasses.png"></img>
                     <h1>SUNGLASSES</h1>
                     </div></button>
-                    <button onClick = {(event) => addCheckIn("ADD CATEGORY")}><div class="items">
+                    <button onClick = {open}><div class="items">
                     <img src="apps.png"></img>
                     <h1>ADD CATEGORY</h1>
                     </div></button>
