@@ -106,7 +106,7 @@ app.post("/foottraffic", (req, res) => {
     })
 })
 
-app.get("/foottraffic/getallhours", (req, res) => {
+app.get("/foottraffic/getalldays", (req, res) => {
     const q = "SELECT COUNT(day),day FROM FootTraffic GROUP BY day"
     db.query(q, (err, data) => {
         if(err){
@@ -114,6 +114,29 @@ app.get("/foottraffic/getallhours", (req, res) => {
             return res.json(err)
         }
         return res.json(data)
+    })
+})
+
+app.get("/foottraffic/getallhours", (req, res) => {
+    const q = "SELECT COUNT(hour),hour FROM FootTraffic GROUP BY hour"
+    db.query(q, (err, data) => {
+        if(err){
+            console.log(err)
+            return res.json(err)
+        }
+        return res.json(data)
+    })
+})
+
+app.get("/foottraffic/getallweeks", (req, res) => {
+    const q = "SELECT COUNT(hour),hour FROM FootTraffic GROUP BY hour"
+    db.query(q, (err, data) => {
+        if(err){
+            console.log(err)
+            return res.json(err)
+        }
+        console.log(res.json(data))
+        // return res.json(data)
     })
 })
 
