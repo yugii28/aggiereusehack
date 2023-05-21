@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { Table } from '@mantine/core';
-import Highcharts from 'highcharts'
-import HighchartsReact from 'highcharts-react-official'
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+import { Link, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function FootTrafficTable(){
     const [data, setData] = useState()
@@ -21,10 +23,13 @@ export default function FootTrafficTable(){
     const [isWeeks, setIsWeeks] = useState(false);
 
     const [mainpageshow, setmainmageshow] = useState(true);
+    const navigate = useNavigate()
 
           
     useEffect(() => {
+        
         const fetchAllBooks = async () => {
+            
             try {
                 const res = await axios.get("http://localhost:8800/foottraffic")
                 setData(res.data)
@@ -50,20 +55,20 @@ export default function FootTrafficTable(){
         getAllDays()
     }, [])
 
-    useEffect(() => {
-        const getAllWeeks = async() => {
-            try {
-                const res = await axios.get("http://localhost:8800/foottraffic/getallweeks")
-                setWeeks(res)
-            }
-            catch(err){
-                // console.log(err)
-            }
-        }
-        getAllWeeks()
-    }, [])
+    // useEffect(() => {
+    //     const getAllWeeks = async() => {
+    //         try {
+    //             const res = await axios.get("http://localhost:8800/foottraffic/getallweeks")
+    //             setWeeks(res)
+    //         }
+    //         catch(err){
+    //             // console.log(err)
+    //         }
+    //     }
+    //     getAllWeeks()
+    // }, [])
 
-    
+    console.log("days", days)
 
     useEffect(() => {
         const getAllHours = async() => {
@@ -77,12 +82,11 @@ export default function FootTrafficTable(){
         }
         getAllHours()
     }, [])
-
     
-    console.log("hours", hours)
 
     function handleclick(){
         // console.log("hi")
+        // console.log("days", days)
         // console.log(hours.data)
         // console.log(hours.data[0])
 
@@ -130,7 +134,7 @@ export default function FootTrafficTable(){
               enabled: false
           },
           title: {
-              text: "Number of students entering Aggie Reuse per day"
+              text: undefined
           },
           yAxis: {
               gridLineWidth: 0,
@@ -142,6 +146,9 @@ export default function FootTrafficTable(){
               categories: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
               labels: {
                   enabled: true
+              },
+              title:{
+                text:"Day of the week",
               },
               lineWidth: 2,
               lineColor: 'black'
@@ -172,8 +179,8 @@ export default function FootTrafficTable(){
               enabled: false
           },
           title: {
-              text: "Number of students entering Aggie Reuse per day"
-          },
+            text: undefined
+        },
           yAxis: {
               gridLineWidth: 0,
               title: {
@@ -185,7 +192,10 @@ export default function FootTrafficTable(){
                   enabled: true
               },
               lineWidth: 2,
-              lineColor: 'black'
+              lineColor: 'black',
+              title: {
+                text: "Hour of the day",
+              }
           },
           credits: {
               enabled: false,
@@ -202,7 +212,19 @@ export default function FootTrafficTable(){
         if(mainpageshow){
             return (
                 <div>
-                    <Table striped highlightOnHover withBorder withColumnBorders>
+                    <div class="main-body1">
+                        <div class="navbar-alpha1">
+                        <nav onClick = {() => navigate("/")} className="navbar">
+                            <img className ="logoImage" src="/logo.png" size="130" width="130"></img>
+                            <div className="column1">
+                                <h1 className="heavy">Aggie Reuse Store</h1>
+                                <h1 className="asucd">ASUCD</h1>
+                            </div>
+                        </nav>
+                        <button><h1 class="inspect-data1" onClick = {() => navigate("/foot-traffic-table")}> INSPECT <br></br>FOOT <br></br>TRAFFIC</h1></button>
+                        </div>
+                        <div className="tablefoot">
+                        <Table  highlightOnHover withBorder >
                         <thead>
                             <tr>
                             <th>ID</th>
@@ -221,26 +243,66 @@ export default function FootTrafficTable(){
                         </tr>
                         ))}
                         </tbody>
-                    </Table>        
-                    <button onClick = {() => handleclick()}>View foot traffic day vs. people data</button>
-                    <button onClick = {() => handleHours()}>View foot traffic hours vs. people data</button>
+                    </Table> 
+                    </div>
+                    <div class="model-choice-row">
+                    <h1 align="center">GENERATE VISUAL TRENDS BY</h1>
+                    <button onClick = {() => handleclick()}><h1 class="model-options"> DAY</h1></button>
+                    <button onClick = {() => handleHours()}><h1 class="model-options"> HOUR</h1></button>
+                    </div>
+                    </div>     
+                    
                 </div>
             )
         }else if(!mainpageshow && !isHours && isDays){
             console.log("days", impData)
             return (
-                <div className= {{width: "90vw"}}>
+                <div>
+                <div class="main-body1">
+                        <div class="navbar-alpha1">
+                        <nav onClick = {() => navigate("/")} className="navbar">
+                            <img className ="logoImage" src="/logo.png" size="130" width="130"></img>
+                            <div className="column1">
+                                <h1 className="heavy">Aggie Reuse Store</h1>
+                                <h1 className="asucd">ASUCD</h1>
+                            </div>
+                        </nav>
+                        <button><h1 class="inspect-data1" onClick = {() => navigate("/foot-traffic-table")}> INSPECT <br></br>FOOT <br></br>TRAFFIC</h1></button>
+                        </div>
+                <div className= "charts">
+                    <h1 className="bar-header" align="center">NUMBER OF STUDENTS PER DAY OF THE WEEK</h1>
                     <HighchartsReact highcharts={Highcharts} options={options} />
-                    <button onClick = {() => setmainmageshow(prev => !prev)}>Go back</button>
+                    <div align="right">
+                    <button className="previous" onClick = {() => setmainmageshow(prev => !prev)}><img src="/previous1.svg" height="50px"></img></button>
+                    </div>
+                </div>
+                </div>
                 </div>
             )
         }else if(!mainpageshow && !isDays && isHours){
             console.log("hours", hoursHighcharts)
             return (
-                <div className= {{width: "90vw"}}>
+                <div>
+                                    <div class="main-body1">
+                        <div class="navbar-alpha1">
+                        <nav onClick = {() => navigate("/")} className="navbar">
+                            <img className ="logoImage" src="/logo.png" size="130" width="130"></img>
+                            <div className="column1">
+                                <h1 className="heavy">Aggie Reuse Store</h1>
+                                <h1 className="asucd">ASUCD</h1>
+                            </div>
+                        </nav>
+                        <button><h1 class="inspect-data1" onClick = {() => navigate("/foot-traffic-table")}> INSPECT <br></br>FOOT <br></br>TRAFFIC</h1></button>
+                        </div>
+                <div className= "charts">
+                    <h1 className="bar-header" align="center">NUMBER OF STUDENTS PER HOUR OF THE DAY</h1>
                     <HighchartsReact highcharts={Highcharts} options={hoursOptions} />
-                    <button onClick = {() => setIsHours(prev => !prev)}>Go back</button>
+                    <div align="right">
+                    <button className="previous" onClick = {() => setmainmageshow(prev => !prev)}><img src="/previous1.svg" height="50px"></img></button>
+                    </div>
                 </div>
+                </div>               
+                 </div>
             )
         }
     }

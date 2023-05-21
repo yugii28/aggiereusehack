@@ -29,7 +29,7 @@ const Books = () => {
                         <h1 className="asucd">ASUCD</h1>
                     </div>
                 </nav>
-                <button><h1 class="inspect-data" onClick = {() => navigate("/foot-traffic-table")}> INSPECT <br></br>DATA</h1></button>
+                <button><h1 class="inspect-data" onClick = {() => navigate("/foot-traffic-table")}> INSPECT <br></br>FOOT <br></br>TRAFFIC</h1></button>
                 </div>
                 <div className="image-choose">
                     <div class="element">
