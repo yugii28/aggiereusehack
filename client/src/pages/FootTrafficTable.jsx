@@ -143,7 +143,7 @@ export default function FootTrafficTable(){
               }
           },
           xAxis: {
-              categories: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+              categories: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
               labels: {
                   enabled: true
               },
@@ -223,7 +223,7 @@ export default function FootTrafficTable(){
                         </nav>
                         <button><h1 class="inspect-data1" onClick = {() => navigate("/foot-traffic-table")}> INSPECT <br></br>FOOT <br></br>TRAFFIC</h1></button>
                         </div>
-                        <div className="tablefoot">
+                        <div className="checktable">
                         <Table  highlightOnHover withBorder >
                         <thead>
                             <tr>

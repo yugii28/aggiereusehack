@@ -197,6 +197,7 @@ button{
 }
 
 table{
+  display: block;
   width: 60%!important;
   margin-top: 5%;
   margin-left: 18%;
@@ -257,4 +258,9 @@ td{
 
 .previous:hover{
   opacity: 0.5;
+}
+
+.checktable{
+  height: 450px;
+  overflow-y: scroll;
 }
