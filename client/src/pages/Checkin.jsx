@@ -12,6 +12,7 @@ export default function CheckIn(){
     const [opened, { open, close }] = useDisclosure(false);
     const theme = useMantineTheme();
     const [form, setForm] = useState();
+    const [showMessage, setShowMessage] = useState(false);
 
     async function addCheckIn(value) {
         const text = value;
@@ -19,7 +20,11 @@ export default function CheckIn(){
             t: text
         };
         try{
-            await axios.post("http://localhost:8800/checkin", b)
+            await axios.post("http://localhost:8800/checkin", b);
+            setShowMessage(true);
+            setTimeout(() => {
+                setShowMessage(false); // Hide the "Item added!" message after 3 seconds
+              }, 1000);
         }catch(err){
            console.log(err);
         }
@@ -65,7 +70,13 @@ export default function CheckIn(){
                 <br></br>
                 <h1 className="add-header">ADD ITEM</h1>
                 <div className="category-icons">
-                <button onClick = {() => addCheckIn("BOOK")}>
+                {showMessage && (
+        <div className="modal">
+          <div className="modal-content">
+            <h3>Item Received!</h3>
+          </div>
+        </div>
+      )}                <button onClick = {() => addCheckIn("BOOK")}>
                     <div class="items">
                         <img src="book.png"></img>
                         <h1>BOOK</h1>

@@ -12,6 +12,8 @@ export default function Checkout(){
     const [opened, { open, close }] = useDisclosure(false);
     const theme = useMantineTheme();
     const [form, setForm] = useState();
+    const [showMessage, setShowMessage] = useState(false);
+
 
     async function addCheckout(value) {
         const text = value;
@@ -19,7 +21,11 @@ export default function Checkout(){
             t: text
         };
         try{
-            await axios.post("http://localhost:8800/checkout", b)
+            await axios.post("http://localhost:8800/checkout", b);
+            setShowMessage(true);
+            setTimeout(() => {
+                setShowMessage(false); // Hide the "Item added!" message after 3 seconds
+              }, 1000);
         }catch(err){
            console.log(err);
         }
@@ -61,6 +67,13 @@ export default function Checkout(){
                 <br></br>
                 <h1 className="add-header">DONATE ITEM</h1>
                 <div className="category-icons">
+                {showMessage && (
+        <div className="modal">
+          <div className="modal-content">
+            <h3>Item Given Away!</h3>
+          </div>
+        </div>
+      )}              
                 <button onClick = {() => addCheckout("BOOK")}>
                     <div class="items">
                         <img src="book.png"></img>
