@@ -1,0 +1,140 @@
+import express from "express"
+import mysql2 from "mysql2"
+import cors from 'cors'
+//idk
+const app = express()
+
+
+//learn  nodemon is
+
+
+//connecting to mysql
+const db = mysql2.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "Dear4camera$",
+    database: "test"
+})
+
+//allows you to send any json file using a client
+app.use(express.json())
+
+//normally, the backend server prevents other applications from using the backend api. cors prevents this- npm install cors in backend folder
+app.use(cors())
+
+
+//how to reach the backend server- if u do node index.js and go to localhost:8800, u will see hello this is the backend printed
+app.get("/", (req, res) => {
+    res.json("hello this is the backend")
+})
+
+//fetching data using node from sql- node fetches information from sql and puts it in localhost:8800/books for react to use later
+// if u do node index.js and go to localhost:8800/books you will see all the books from the sql database
+app.get("/books", (req, res) => {
+    const q = "SELECT * FROM books"
+    db.query(q, (err, data) => {
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+})
+
+app.get("/foottraffic", (req, res) => {
+    const q = "SELECT * FROM foottraffic"
+    db.query(q, (err, data) => {
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+})
+
+app.get("/checkin", (req, res) => {
+    const q = "SELECT * FROM checkin"
+    db.query(q, (err, data) => {
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+})
+
+//creating new data using node- you can only test this using postman, which allows you to make api requests
+//in other words, writing the data to the database
+app.post("/books", (req, res) => {
+    const q = "INSERT INTO books (`title`, `desc`, `price`) VALUES (?)";
+    const values = [
+        req.body.title,
+        req.body.desc,
+        req.body.price,
+    ]
+    //you pass the query and the values, and it returns either an err or data
+    db.query(q, [values], (err, data) => {
+        if (err) return res.json(err)
+        // if the book is created successfully, sql returns that back
+        return res.json("Book has been created successfully");
+    })
+})
+
+app.post("/foottraffic", (req, res) => {
+    const currentDate = new Date();
+    const day = currentDate.getDay()
+    const hour = currentDate.getHours();
+
+    const q = "INSERT INTO foottraffic (`day`, `hour`) VALUES (?)";
+    const values = [
+        day,
+        hour,
+    ]
+    //you pass the query and the values, and it returns either an err or data
+    db.query(q, [values], (err, data) => {
+        if (err) return res.json(err)
+        // if the book is created successfully, sql returns that back
+        return res.json("Book has been created successfully");
+    })
+})
+
+app.post("/checkin", (req, res) => {
+    const currentDate = new Date();
+    const day = currentDate.getDay()
+    const hour = currentDate.getHours();
+
+    const q = "INSERT INTO checkin (`hour`, `day`, `category`) VALUES (?)";
+    const values = [
+        hour,
+        day,
+        category
+    ]
+    //you pass the query and the values, and it returns either an err or data
+    db.query(q, [values], (err, data) => {
+        if (err) return res.json(err)
+        // if the book is created successfully, sql returns that back
+        return res.json("Book has been created successfully");
+    })
+})
+
+app.delete("/books/:id", (req, res) => {
+    const bookId = req.params.id;
+    const q = "DELETE FROM books WHERE id = ?"
+
+    db.query(q, [bookId], (err, data) => {
+        if (err) return res.json(err)
+        // if the book is created successfully, sql returns that back
+        return res.json("Book has been deleted successfully");
+    })
+})
+
+app.put("/books/:id", (req, res) => {
+    const bookId = req.params.id;
+    console.log(bookId);
+    const q = "UPDATE books SET `title` = ?, `desc` = ?, `price` = ?, WHERE id = ?";
+    const values = [
+        req.body.title,
+        req.body.desc,
+        req.body.price, 
+    ]
+    db.query(q, [...values, bookId], (err, data) => {
+        if (err) return res.json(err)
+        // if the book is created successfully, sql returns that back
+        return res.json("Book has been updated successfully");
+    })
+})
+//idk
+app.listen(8800, ()=> {
+    console.log("Connected to backend")
+})
