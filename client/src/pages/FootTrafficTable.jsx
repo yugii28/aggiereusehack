@@ -254,7 +254,7 @@ export default function FootTrafficTable(){
                     
                 </div>
             )
-        }else if(!mainpageshow && !isHours && isDays){
+        }else if(isDays){
             console.log("days", impData)
             return (
                 <div>
@@ -273,17 +273,17 @@ export default function FootTrafficTable(){
                     <h1 className="bar-header" align="center">NUMBER OF STUDENTS PER DAY OF THE WEEK</h1>
                     <HighchartsReact highcharts={Highcharts} options={options} />
                     <div align="right">
-                    <button className="previous" onClick = {() => setmainmageshow(prev => !prev)}><img src="/previous1.svg" height="50px"></img></button>
+                    <button className="previous" onClick = {() => setmainmageshow(true)}><img src="/previous1.svg" height="50px"></img></button>
                     </div>
                 </div>
                 </div>
                 </div>
             )
-        }else if(!mainpageshow && !isDays && isHours){
+        }else if(isHours){
             console.log("hours", hoursHighcharts)
             return (
                 <div>
-                                    <div class="main-body1">
+                    <div class="main-body1">
                         <div class="navbar-alpha1">
                         <nav onClick = {() => navigate("/")} className="navbar">
                             <img className ="logoImage" src="/logo.png" size="130" width="130"></img>
