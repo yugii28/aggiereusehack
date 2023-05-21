@@ -237,9 +237,9 @@ export default function FootTrafficTable(){
                         {data.map((element) => (
                             <tr key={element.id}>
                             <td>{element.id}</td>
-                            <td>{element.day}</td>
+                            <td>{element.day == 0 ? "Sunday": element.day == 1 ? "Monday": element.day == 2 ? "Tuesday": element.day == 3 ? "Wednesday": element.day == 4 ? "Thursday": element.day == 5 ? "Friday": element.day == 6 ? "Saturday": null}</td>
                             <td>{element.hour}</td>
-                            <td>{element.date}</td>
+                            <td>{element.date ? element.date.split("T")[0]: null}</td>
                         </tr>
                         ))}
                         </tbody>
