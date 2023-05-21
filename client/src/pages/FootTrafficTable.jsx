@@ -172,7 +172,7 @@ export default function FootTrafficTable(){
           },
           tooltip: {
             formatter: function() {
-                return 'There have been <b>' + this.y + '</b>  people on <b>' + this.x + 's</b>'
+                return 'There have been <b>' + this.y + '</b>  people at <b>' + this.x + '</b>oclock'
             }
         },
           legend: {
@@ -223,6 +223,7 @@ export default function FootTrafficTable(){
                         </nav>
                         <button><h1 class="inspect-data1" onClick = {() => navigate("/foot-traffic-table")}> INSPECT <br></br>FOOT <br></br>TRAFFIC</h1></button>
                         </div>
+                        <h1 className="bar-header" align="center">DATABASE FOR FOOT TRAFFIC</h1>
                         <div className="checktable">
                         <Table  highlightOnHover withBorder >
                         <thead>

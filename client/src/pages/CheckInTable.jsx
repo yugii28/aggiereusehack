@@ -2,12 +2,21 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { Table } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
-
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
 
 export default function CheckInTable(){
     const [data, setData] = useState()
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
+
+    const [cat, setCat] = useState();
+    const [impData, setImpData] = useState();
+
+    const [mainpageshow, setmainmageshow] = useState(true);
+    const [isCats, setIsCats] = useState();
+
+    const [options, setOptions] = useState();
 
 
     useEffect(() => {
@@ -24,7 +33,79 @@ export default function CheckInTable(){
         fetchAllCheckIn()
     }, [])
 
+    useEffect(() => {
+        const getAllCats = async() => {
+            try {
+                const res = await axios.get("http://localhost:8800/checkin/getallcategories")
+                setCat(res)
+            }
+            catch(err){
+                // console.log(err)
+            }
+        }
+        getAllCats()
+    }, [])
+
+    function getCategory(){
+        const imp_data = cat.data.map(dataPoint => ({
+            y: dataPoint["COUNT(category)"],
+            x: dataPoint["category"],
+          }));
+        console.log(imp_data)
+        setmainmageshow(prev => !prev);
+        setIsCats(prev => !prev);
+        
+        const options = {
+            chart: {
+              type: 'column',
+              borderWidth: 0,
+              backgroundColor: "transparent"
+              },
+              tooltip: {
+                formatter: function() {
+                    return this.y + " " + this.x + 's have been received'
+                }
+            },
+              legend: {
+                  enabled: false
+              },
+              title: {
+                  text: undefined
+              },
+              yAxis: {
+                  gridLineWidth: 0,
+                  title: {
+                      text: "Number of items received",
+                  }
+              },
+              xAxis: {
+                type: 'category',
+                categories: imp_data.map(item => item.x),
+                labels: {
+                      enabled: true
+                  },
+                  title:{
+                    text:"Categories",
+                  },
+                  lineWidth: 2,
+                  lineColor: 'black'
+              },
+              credits: {
+                  enabled: false,
+              },
+              series: [
+                  {
+                      colorByPoint: true,
+                      data: imp_data.map(item => item.y),
+                    }
+              ],
+          };
+          setOptions(options);
+    }   
+
+
     if(!loading && Array.isArray(data)){
+        if(mainpageshow){
     return (
         <div>
             <div class="main-body1">
@@ -63,8 +144,23 @@ export default function CheckInTable(){
                 </tbody>
             </Table>
             </div>
+            <div class="model-choice-row">
+                            <h1 align="center">GENERATE VISUAL TRENDS BY</h1>
+                            <button onClick = {() => getCategory()}><h1 class="model-options"> CATEGORY</h1></button>
+            </div> 
             </div>        
         </div>
     )
+    }else {
+        return (
+            <div className= "charts">
+                <h1 className="bar-header" align="center">AMOUNT OF EACH ITEM RECEIVED</h1>
+                <HighchartsReact highcharts={Highcharts} options={options} />
+                <div align="right">
+                <button className="previous" onClick = {() => setmainmageshow(prev => !prev)}><img src="/previous1.svg" height="50px"></img></button>
+                </div>
+            </div>
+        )
+    }
     }
 }
