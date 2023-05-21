@@ -5,14 +5,21 @@ import { Link, Navigate } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import '../App.css'
 
+
 {/* how to fetch data from sql server in react */}
 
 const Books = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [showMessage, setShowMessage] = useState(false);
+
 
     const addFootTraffic = async e => {
         try{
             await axios.post("http://localhost:8800/foottraffic")
+            setShowMessage(true);
+            setTimeout(() => {
+                setShowMessage(false); // Hide the "Item added!" message after 3 seconds
+              }, 1000);
         }catch(err){
            console.log(err);
         }
@@ -41,6 +48,13 @@ const Books = () => {
                     <h1>CHECK OUT</h1>
                     </div>
                     <div class="element">
+                    {showMessage && (
+        <div className="modal">
+          <div className="modal-content">
+            <h3>Person Counted!</h3>
+          </div>
+        </div>
+        )}         
                     <button><img onClick = {() => addFootTraffic()} className="curve-img" src="footraffic.jpeg" width="350"></img></button>
                     <h1>INCREMENT FOOT TRAFFIC</h1>
                     </div>
