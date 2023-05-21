@@ -21,22 +21,21 @@ export default function FootTrafficTable(){
     fetchAllBooks()
     }, [])
 
-    console.log(data)
-
-
-    async function getAllHours(){
-        try {
-            const res = await axios.get("http://localhost:8800/foottraffic/getallhours")
-            setHours(res)
+    useEffect(() => {
+        const getAllHours = async() => {
+            try {
+                const res = await axios.get("http://localhost:8800/foottraffic/getallhours")
+                setHours(res)
+            }
+            catch(err){
+                // console.log(err)
+            }
         }
-        catch(err){
-            // console.log(err)
-        }
-    }
-    getAllHours()
-
+        getAllHours()
+    }, [])
+    
     console.log(data)
-    console.log(hours)
+    console.log(hours.data)
 
     if(!loading && Array.isArray(data)){
     return (
