@@ -254,7 +254,7 @@ export default function FootTrafficTable(){
                     
                 </div>
             )
-        }else if(isDays){
+        }else if(isDays && !isHours){
             console.log("days", impData)
             return (
                 <div>
@@ -279,7 +279,7 @@ export default function FootTrafficTable(){
                 </div>
                 </div>
             )
-        }else if(isHours){
+        }else if(isHours && !isDays){
             console.log("hours", hoursHighcharts)
             return (
                 <div>

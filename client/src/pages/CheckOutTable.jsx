@@ -2,14 +2,19 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { Table } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
-
-
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
 
 export default function CheckOutTable(){
     const [data, setData] = useState()
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
+    const [cat, setCat] = useState();
+    const [impData, setImpData] = useState();
+
+    const [mainpageshow, setmainmageshow] = useState(true);
+    const [isCats, setIsCats] = useState();
 
     useEffect(() => {
         const fetchAllCheckOut = async () => {
@@ -25,11 +30,12 @@ export default function CheckOutTable(){
         fetchAllCheckOut()
     }, [])
 
+
     if(!loading && Array.isArray(data)){
     return (
         <div>
-            <div class="main-body1">
-                        <div class="navbar-alpha1">
+            <div className="main-body1">
+                        <div className="navbar-alpha1">
                         <nav onClick = {() => navigate("/")} className="navbar">
                             <img className ="logoImage" src="/logo.png" size="130" width="130"></img>
                             <div className="column1">
@@ -62,10 +68,12 @@ export default function CheckOutTable(){
                 </tr>
                 ))}
                 </tbody>
-            </Table>       
+            </Table>    
+           
             </div>
             </div> 
+            
         </div>
-    )
+        )
     }
 }
