@@ -4,7 +4,6 @@ import {
   Routes,
   Route,
 } from "react-router-dom"
-import Add from './pages/Add';
 import Books from './pages/Books';
 import Update from './pages/Update';
 import CheckIn from './pages/Checkin';
@@ -26,7 +25,6 @@ function App() {
           <Route path = "/" element = {<Books/>}/> 
           
           {/* how the user can create new data (book)- that is, sending data from react to be stored in the sql server */}
-          <Route path = "/add" element = {<Add/>}/>
           <Route path = "/checkin" element = {<CheckIn/>}/>
           <Route path = "/checkout" element = {<CheckOut/>}/>
           <Route path = "/foot-traffic-table" element = {<FootTrafficTable/>}/>

@@ -27,8 +27,8 @@ const Books = () => {
     
   return (
     <div>
-              <div class="main-body">
-                <div class="navbar-alpha">
+        <div class="main-body">
+            <div class="navbar-alpha">
                 <nav onClick = {() => navigate("/")} className="navbar">
                     <img className ="logoImage" src="/logo.png" size="130" width="130"></img>
                     <div className="column1">
@@ -37,56 +37,30 @@ const Books = () => {
                     </div>
                 </nav>
                 <button><h1 class="inspect-data" onClick = {() => navigate("/foot-traffic-table")}> INSPECT <br></br>FOOT <br></br>TRAFFIC</h1></button>
-                </div>
+            </div>
                 <div className="image-choose">
                     <div class="element">
-                    <button><Link to = "/checkin"><img onClick = {() => navigate("/checkin")} className="curve-img" src="donate1.jpeg"  width="350"></img></Link></button>
-                    <h1>DONATIONS</h1>
+                            <button><Link to = "/checkin"><img onClick = {() => navigate("/checkin")} className="curve-img" src="donate1.jpeg"  width="350"></img></Link></button>
+                            <h1>DONATIONS</h1>
                     </div>
                     <div class="element">
-                    <button><Link to = "/checkout"><img onClick = {() => navigate("/checkout")} className="curve-img" src="checkout.avif" width="350"></img></Link></button>
-                    <h1>CHECK OUT</h1>
+                        <button><Link to = "/checkout"><img onClick = {() => navigate("/checkout")} className="curve-img" src="checkout.avif" width="350"></img></Link></button>
+                        <h1>CHECK OUT</h1>
                     </div>
                     <div class="element">
                     {showMessage && (
-        <div className="modal">
-          <div className="modal-content">
-            <h3>Person Counted!</h3>
-          </div>
-        </div>
-        )}         
+                    <div className="modal">
+                        <div className="modal-content">
+                             <h3>Person Counted!</h3>
+                        </div>
+                    </div>
+                    )}         
                     <button><img onClick = {() => addFootTraffic()} className="curve-img" src="footraffic.jpeg" width="350"></img></button>
                     <h1>INCREMENT FOOT TRAFFIC</h1>
                     </div>
                 </div>
-
-
-                    {/* <button onClick = {() => router.push("/checkin")}>Check in</button>
-                    <button onClick = {() => router.push("/checkout")}>Check out</button>
-                    <button onClick = {() => addFootTraffic()}>Foot traffic</button> */}
-                </div>
-        {/* <button className='add'>
-            <Link to = "/add">
-                <h3>Add new book</h3>
-            </Link>
-        </button>
-        <button onClick = {() => addFootTraffic()}>Foot traffic</button>
-        <button>
-            <Link to = "/checkin">
-                <h3>Check in</h3>
-            </Link>        
-        </button>
-        <button>
-            <Link to = "/checkout">
-                <h3>Check out</h3>
-            </Link>        
-        </button>    
-        <button>
-            <Link to = "/foot-traffic-table">
-                <h3>View foot traffic table</h3>
-            </Link>        
-        </button>    */}
-    </div>
+            </div>
+         </div>
   )
 }
 

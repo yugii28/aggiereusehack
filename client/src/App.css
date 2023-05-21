@@ -199,7 +199,6 @@ button{
 table{
   display: block;
   width: 60%!important;
-  margin-top: 5%;
   margin-left: 18%;
   margin-right: 10%;
 }
@@ -261,7 +260,7 @@ td{
 }
 
 .checktable{
-  height: 450px;
+  height: 400px;
   overflow-y: scroll;
 }
 
@@ -283,4 +282,8 @@ td{
   padding: 20px;
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.button-category{
+  width: inherit!important;
 }

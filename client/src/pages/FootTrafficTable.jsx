@@ -214,71 +214,70 @@ export default function FootTrafficTable(){
                 <div>
                     <div class="main-body1">
                         <div class="navbar-alpha1">
-                        <nav onClick = {() => navigate("/")} className="navbar">
-                            <img className ="logoImage" src="/logo.png" size="130" width="130"></img>
-                            <div className="column1">
-                                <h1 className="heavy">Aggie Reuse Store</h1>
-                                <h1 className="asucd">ASUCD</h1>
-                            </div>
-                        </nav>
-                        <button><h1 class="inspect-data1" onClick = {() => navigate("/foot-traffic-table")}> INSPECT <br></br>FOOT <br></br>TRAFFIC</h1></button>
+                            <nav onClick = {() => navigate("/")} className="navbar">
+                                <img className ="logoImage" src="/logo.png" size="130" width="130"></img>
+                                <div className="column1">
+                                    <h1 className="heavy">Aggie Reuse Store</h1>
+                                    <h1 className="asucd">ASUCD</h1>
+                                </div>
+                            </nav>
+                            <button><h1 class="inspect-data1" onClick = {() => navigate("/foot-traffic-table")}> INSPECT <br></br>FOOT <br></br>TRAFFIC</h1></button>
                         </div>
                         <h1 className="bar-header" align="center">DATABASE FOR FOOT TRAFFIC</h1>
                         <div className="checktable">
-                        <Table  highlightOnHover withBorder >
-                        <thead>
-                            <tr>
-                            <th>ID</th>
-                            <th>Day</th>
-                            <th>Hour</th>
-                            <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>        
-                        {data.map((element) => (
-                            <tr key={element.id}>
-                            <td>{element.id}</td>
-                            <td>{element.day == 0 ? "Sunday": element.day == 1 ? "Monday": element.day == 2 ? "Tuesday": element.day == 3 ? "Wednesday": element.day == 4 ? "Thursday": element.day == 5 ? "Friday": element.day == 6 ? "Saturday": null}</td>
-                            <td>{element.hour}</td>
-                            <td>{element.date ? element.date.split("T")[0]: null}</td>
-                        </tr>
-                        ))}
-                        </tbody>
-                    </Table> 
+                            <Table  highlightOnHover withBorder >
+                                <thead>
+                                    <tr>
+                                    <th>ID</th>
+                                    <th>Day</th>
+                                    <th>Hour</th>
+                                    <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>        
+                                {data.map((element) => (
+                                    <tr key={element.id}>
+                                    <td>{element.id}</td>
+                                    <td>{element.day == 0 ? "Sunday": element.day == 1 ? "Monday": element.day == 2 ? "Tuesday": element.day == 3 ? "Wednesday": element.day == 4 ? "Thursday": element.day == 5 ? "Friday": element.day == 6 ? "Saturday": null}</td>
+                                    <td>{element.hour}</td>
+                                    <td>{element.date ? element.date.split("T")[0]: null}</td>
+                                </tr>
+                                ))}
+                                </tbody>
+                        </Table> 
                     </div>
                     <div class="model-choice-row">
-                    <h1 align="center">GENERATE VISUAL TRENDS BY</h1>
-                    <button onClick = {() => handleclick()}><h1 class="model-options"> DAY</h1></button>
-                    <button onClick = {() => handleHours()}><h1 class="model-options"> HOUR</h1></button>
+                        <h1 align="center">GENERATE VISUAL TRENDS BY</h1>
+                        <button onClick = {() => handleclick()}><h1 class="model-options"> DAY</h1></button>
+                        <button onClick = {() => handleHours()}><h1 class="model-options"> HOUR</h1></button>
                     </div>
-                    </div>     
-                    
-                </div>
+                </div>     
+            </div>
             )
         }else if(isDays && !isHours){
             console.log("days", impData)
             return (
                 <div>
-                <div class="main-body1">
-                        <div class="navbar-alpha1">
-                        <nav onClick = {() => navigate("/")} className="navbar">
-                            <img className ="logoImage" src="/logo.png" size="130" width="130"></img>
-                            <div className="column1">
-                                <h1 className="heavy">Aggie Reuse Store</h1>
-                                <h1 className="asucd">ASUCD</h1>
+                    <div class="main-body1">
+                            <div class="navbar-alpha1">
+                                <nav onClick = {() => navigate("/")} className="navbar">
+                                    <img className ="logoImage" src="/logo.png" size="130" width="130"></img>
+                                    <div className="column1">
+                                        <h1 className="heavy">Aggie Reuse Store</h1>
+                                        <h1 className="asucd">ASUCD</h1>
+                                    </div>
+                                </nav>
+                                <button><h1 class="inspect-data1" onClick = {() => navigate("/foot-traffic-table")}> INSPECT <br></br>FOOT <br></br>TRAFFIC</h1></button>
                             </div>
-                        </nav>
-                        <button><h1 class="inspect-data1" onClick = {() => navigate("/foot-traffic-table")}> INSPECT <br></br>FOOT <br></br>TRAFFIC</h1></button>
+                            <div className= "charts">
+                                <h1 className="bar-header" align="center">NUMBER OF STUDENTS PER DAY OF THE WEEK</h1>
+                                <HighchartsReact highcharts={Highcharts} options={options} />
+                                <div align="right">
+                                    <button className="previous" onClick = {() => setmainmageshow(true)}><img src="/previous1.svg" height="50px"></img></button>
+                                </div>
+                            </div>
                         </div>
-                <div className= "charts">
-                    <h1 className="bar-header" align="center">NUMBER OF STUDENTS PER DAY OF THE WEEK</h1>
-                    <HighchartsReact highcharts={Highcharts} options={options} />
-                    <div align="right">
-                    <button className="previous" onClick = {() => setmainmageshow(true)}><img src="/previous1.svg" height="50px"></img></button>
                     </div>
-                </div>
-                </div>
-                </div>
             )
         }else if(isHours && !isDays){
             console.log("hours", hoursHighcharts)
@@ -295,16 +294,16 @@ export default function FootTrafficTable(){
                         </nav>
                         <button><h1 class="inspect-data1" onClick = {() => navigate("/foot-traffic-table")}> INSPECT <br></br>FOOT <br></br>TRAFFIC</h1></button>
                         </div>
-                <div className= "charts">
-                    <h1 className="bar-header" align="center">NUMBER OF STUDENTS PER HOUR OF THE DAY</h1>
-                    <HighchartsReact highcharts={Highcharts} options={hoursOptions} />
-                    <div align="right">
-                    <button className="previous" onClick = {() => setmainmageshow(prev => !prev)}><img src="/previous1.svg" height="50px"></img></button>
-                    </div>
-                </div>
-                </div>               
+                        <div className= "charts">
+                            <h1 className="bar-header" align="center">NUMBER OF STUDENTS PER HOUR OF THE DAY</h1>
+                            <HighchartsReact highcharts={Highcharts} options={hoursOptions} />
+                            <div align="right">
+                                <button className="previous" onClick = {() => setmainmageshow(prev => !prev)}><img src="/previous1.svg" height="50px"></img></button>
+                            </div>
+                        </div>
+                    </div>               
                  </div>
-            )
+                )
+            }
         }
     }
-}

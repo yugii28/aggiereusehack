@@ -1,7 +1,6 @@
 import express from "express"
 import mysql2 from "mysql2"
 import cors from 'cors'
-//idk
 const app = express()
 
 
@@ -30,21 +29,6 @@ app.get("/", (req, res) => {
 
 //fetching data using node from sql- node fetches information from sql and puts it in localhost:8800/books for react to use later
 // if u do node index.js and go to localhost:8800/books you will see all the books from the sql database
-app.get("/books", (req, res) => {
-    const q = "SELECT * FROM books"
-    db.query(q, (err, data) => {
-        if(err) return res.json(err)
-        return res.json(data)
-    })
-})
-
-app.get("/checkintest", (req, res) => {
-    const q = "SELECT * FROM checkintest"
-    db.query(q, (err, data) => {
-        if(err) return res.json(err)
-        return res.json(data)
-    })
-})
 
 app.get("/foottraffic", (req, res) => {
     const q = "SELECT * FROM foottraffic"
@@ -235,4 +219,26 @@ app.put("/books/:id", (req, res) => {
 //idk
 app.listen(8800, ()=> {
     console.log("Connected to backend")
+})
+
+app.get("/checkout/getallcategories", (req, res) => {
+    const q = "SELECT COUNT(category),category FROM checkout GROUP BY category"
+    db.query(q, (err, data) => {
+        if(err){
+            console.log(err)
+            return res.json(err)
+        }
+        return res.json(data)
+    })
+})
+
+app.get("/checkin/getallcategories", (req, res) => {
+    const q = "SELECT COUNT(category),category FROM checkin GROUP BY category"
+    db.query(q, (err, data) => {
+        if(err){
+            console.log(err)
+            return res.json(err)
+        }
+        return res.json(data)
+    })
 })

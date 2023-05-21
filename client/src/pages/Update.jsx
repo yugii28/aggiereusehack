@@ -50,8 +50,8 @@ const Update = () => {
         <input type="text" placeholder = "desc" onChange={handleChange} name = "desc"/>
         <input type="number" placeholder = "price" onChange={handleChange} name = "price"/>
     
-    {/* this button will send all the input fields to the backend server */}
-    <button className='formButton' onClick = {handleClick}>Update</button>
+        {/* this button will send all the input fields to the backend server */}
+        <button className='formButton' onClick = {handleClick}>Update</button>
     </div>
     )
 }
