@@ -1,39 +1,14 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
 import {useState} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
+import '../App.css'
 
 {/* how to fetch data from sql server in react */}
 
 const Books = () => {
     const navigate = useNavigate()
-    const [books, setBooks] = useState([])
-
-    // so basically node fetches all information from sql and puts it in localhost:8800/books,
-    // and then react takes all the information from localhost:8800/books and puts it on the homepage
-    useEffect(() => {
-        const fetchAllBooks = async () => {
-            try {
-                const res = await axios.get("http://localhost:8800/books")
-                // console.log(res);
-                setBooks(res.data)
-            }
-            catch(err){
-                // console.log(err)
-            }
-        }
-    fetchAllBooks()
-    }, [])
-
-    const handleDelete = async (id) => {
-        try{
-            await axios.delete("http://localhost:8800/books/"+id)
-            window.location.reload()
-        }catch(err){
-            console.log(err);
-        }
-    }
 
     const addFootTraffic = async e => {
         try{
@@ -45,23 +20,38 @@ const Books = () => {
     
   return (
     <div>
-        <h1>Here is a list of all books you have added!</h1>
-        <div className='books'>
-            {/* when using map, you should give each book a unique id */}
-            {books.map(book => (
-                <div className = 'book text' key = {book.id}>
-                    <h2 className = "text">Title: {book.title}</h2>
-                    <h2 className = "text">Description: {book.desc}</h2>
-                    <h2 className = "text">Price: {book.price}</h2>
-                    <button className="delete" onClick = {() => handleDelete(book.id)}>Delete</button>
-                    {/* <button className="update"><Link to = {`/update/${book.id}`}>Update</Link></button> */}
-
+              <div class="main-body">
+                <div class="navbar-alpha">
+                <nav onClick = {() => navigate("/")} className="navbar">
+                    <img className ="logoImage" src="/logo.png" size="130" width="130"></img>
+                    <div className="column1">
+                        <h1 className="heavy">Aggie Reuse Store</h1>
+                        <h1 className="asucd">ASUCD</h1>
+                    </div>
+                </nav>
+                <button><h1 class="inspect-data" onClick = {() => navigate("/foot-traffic-table")}> INSPECT <br></br>DATA</h1></button>
                 </div>
-            ))}
-        </div>
-        <br></br>
-        <br></br>
-        <button className='add'>
+                <div className="image-choose">
+                    <div class="element">
+                    <button><Link to = "/checkin"><img onClick = {() => navigate("/checkin")} className="curve-img" src="donate1.jpeg"  width="350"></img></Link></button>
+                    <h1>DONATIONS</h1>
+                    </div>
+                    <div class="element">
+                    <button><Link to = "/checkout"><img onClick = {() => navigate("/checkout")} className="curve-img" src="checkout.avif" width="350"></img></Link></button>
+                    <h1>CHECK OUT</h1>
+                    </div>
+                    <div class="element">
+                    <button><img onClick = {() => addFootTraffic()} className="curve-img" src="footraffic.jpeg" width="350"></img></button>
+                    <h1>INCREMENT FOOT TRAFFIC</h1>
+                    </div>
+                </div>
+
+
+                    {/* <button onClick = {() => router.push("/checkin")}>Check in</button>
+                    <button onClick = {() => router.push("/checkout")}>Check out</button>
+                    <button onClick = {() => addFootTraffic()}>Foot traffic</button> */}
+                </div>
+        {/* <button className='add'>
             <Link to = "/add">
                 <h3>Add new book</h3>
             </Link>
@@ -81,7 +71,7 @@ const Books = () => {
             <Link to = "/foot-traffic-table">
                 <h3>View foot traffic table</h3>
             </Link>        
-        </button>   
+        </button>    */}
     </div>
   )
 }
