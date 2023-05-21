@@ -43,12 +43,12 @@ export default function CheckIn(){
                     <form onSubmit = {() => addCheckIn(form)}>
                     <TextInput
                     placeholder="Your name"
-                    label="Full name"
+                    label="Category Name"
                     withAsterisk
                     onChange={e => setForm(e.target.value)}
                     />
                     <br></br>
-                    <Button type = "submit" variant="gradient" gradient={{ from: 'teal', to: 'lime', deg: 105 }}>Lime green</Button>
+                    <Button type = "submit" variant="gradient" gradient={{ from: 'teal', to: 'lime', deg: 105 }}>Add Category</Button>
                     </form>
                 </Modal>
             <div class="main-body">

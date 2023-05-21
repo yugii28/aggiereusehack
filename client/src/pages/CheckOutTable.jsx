@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { Table } from '@mantine/core';
+import { useNavigate } from 'react-router-dom';
+
+
 
 export default function CheckOutTable(){
     const [data, setData] = useState()
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
+
 
     useEffect(() => {
         const fetchAllCheckOut = async () => {
@@ -23,6 +28,19 @@ export default function CheckOutTable(){
     if(!loading && Array.isArray(data)){
     return (
         <div>
+            <div class="main-body1">
+                        <div class="navbar-alpha1">
+                        <nav onClick = {() => navigate("/")} className="navbar">
+                            <img className ="logoImage" src="/logo.png" size="130" width="130"></img>
+                            <div className="column1">
+                                <h1 className="heavy">Aggie Reuse Store</h1>
+                                <h1 className="asucd">ASUCD</h1>
+                            </div>
+                        </nav>
+                        <button><h1 class="inspect-data1" onClick = {() => navigate("/foot-traffic-table")}> INSPECT <br></br>FOOT <br></br>TRAFFIC</h1></button>
+                        </div>
+            <h1 className="bar-header" align="center">DATABASE FOR GIVEAWAYS</h1>
+            <div className="checktable">
             <Table striped highlightOnHover withBorder withColumnBorders>
                 <thead>
                     <tr>
@@ -44,7 +62,9 @@ export default function CheckOutTable(){
                 </tr>
                 ))}
                 </tbody>
-            </Table>        
+            </Table>       
+            </div>
+            </div> 
         </div>
     )
     }
