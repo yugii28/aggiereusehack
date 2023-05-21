@@ -44,13 +44,12 @@ body {
   background-color: #032851;
   padding-left: 15px;
   padding-right: 15px;
-  padding-top: 25px;
-  padding-bottom: 25px;
   color: white;
   font-weight: 900;
-  border-radius: 50%;
+  border-radius: 10%;
   margin-top: 0;
   margin-bottom: 0;
+  font-size: 20px;
 }
 
 .inspect-data:hover{
@@ -162,3 +161,100 @@ button{
   border: none;
 }
 
+
+.navbar-alpha1{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #032851;
+  align-items: center;
+}
+
+.main-body1{
+  background-color: white;
+  height: 100vh;
+}
+
+.navbar-alpha1 h1{
+  margin-right: 20px;
+  color: white;
+} 
+
+.inspect-data1{
+  background-color: white;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #032851!important;
+  font-weight: 900;
+  border-radius: 10%;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 20px;
+}
+
+.inspect-data1:hover{
+  opacity: 0.5;
+}
+
+table{
+  width: 60%!important;
+  margin-top: 5%;
+  margin-left: 18%;
+  margin-right: 10%;
+}
+
+th{
+  text-align: center!important;
+  width: 10%!important;
+  font-weight: 900!important;
+  font-size: 20px!important;
+}
+
+td{
+  text-align: center;
+  width: 10%;
+  font-size: 20px!important;
+}
+
+.model-choice-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 30px;
+}
+.model-choice-row button{
+  background-color: #032851;
+  color: white;
+  border-radius: 10%;
+  margin-left: 20px;
+  width: 100px;
+}
+
+.model-choice-row h1{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.model-choice-row button:hover{
+  opacity: 0.5;
+}
+
+.bar-header{
+  font-weight: 900;
+  font-style: italic;
+}
+
+.charts{
+  width: 90%;
+  margin: auto;
+}
+
+.previous{
+  color: white;
+  font-size: 20px;
+  border-radius: 10%;
+}
+
+.previous:hover{
+  opacity: 0.5;
+}
