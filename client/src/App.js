@@ -19,12 +19,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          {/* how to fetch data from sql server in react */}
-          {/* when we visit the homepage, our aim is to show all
-          the books that are stored in the sql server */}
-          <Route path = "/" element = {<Books/>}/> 
-          
-          {/* how the user can create new data (book)- that is, sending data from react to be stored in the sql server */}
+          <Route path = "/" element = {<Books/>}/>           
           <Route path = "/checkin" element = {<CheckIn/>}/>
           <Route path = "/checkout" element = {<CheckOut/>}/>
           <Route path = "/foot-traffic-table" element = {<FootTrafficTable/>}/>

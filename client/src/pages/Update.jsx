@@ -19,7 +19,6 @@ const Update = () => {
     const bookId = location.pathname.split("/")[2];
     //this function makes it so that the book is updated after every key that the user enters in the input tag
     const handleChange = (e) => {
-        //don't understand this- watch lama tech's useState video- 6 mistakes every junior dev makes
         setBook(prev=>({...prev, [e.target.name]: e.target.value}))
     }
 

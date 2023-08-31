@@ -287,3 +287,11 @@ td{
 .button-category{
   width: inherit!important;
 }
+
+.delete-button {
+  background-color: red;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}

@@ -190,14 +190,14 @@ app.post("/checkout", (req, res) => {
 })
 
 
-app.delete("/books/:id", (req, res) => {
-    const bookId = req.params.id;
-    const q = "DELETE FROM books WHERE id = ?"
-
-    db.query(q, [bookId], (err, data) => {
-        if (err) return res.json(err)
-        // if the book is created successfully, sql returns that back
-        return res.json("Book has been deleted successfully");
+app.delete("/deletecheckin/:id", (req, res) => {
+    const itemId = req.params.id;
+    db.query("DELETE FROM checkin WHERE id = ?", itemId, (err, result) => {
+        if(err){
+            console.log(err)
+        }else{
+            res.send(result)
+        }
     })
 })
 
