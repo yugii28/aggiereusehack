@@ -45,7 +45,7 @@ export default function CheckOutTable() {
 
   const deleteItem = (id) => {
     axios
-      .delete(`http://localhost:8800/deletecheckin/${id}`)
+      .delete(`http://localhost:8800/deletecheckout/${id}`)
       .then((response) => {
         setData(
           data.filter((val) => {

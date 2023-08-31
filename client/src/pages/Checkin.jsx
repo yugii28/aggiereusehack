@@ -13,6 +13,7 @@ export default function CheckIn() {
   const theme = useMantineTheme();
   const [form, setForm] = useState();
   const [showMessage, setShowMessage] = useState(false);
+  const [modalContent, setModalContent] = useState("");
 
   async function addCheckIn(value) {
     const text = value;
@@ -22,6 +23,7 @@ export default function CheckIn() {
     try {
       await axios.post("http://localhost:8800/checkin", b);
       setShowMessage(true);
+      setModalContent(`${value} added`);
       setTimeout(() => {
         setShowMessage(false); // Hide the "Item added!" message after 3 seconds
       }, 1000);
@@ -30,7 +32,35 @@ export default function CheckIn() {
     }
   }
 
-  const handleCategory = () => {};
+  const undo = () => {
+    axios.delete(`http://localhost:8800/undo/checkin/`);
+  };
+
+  const handleUndo = () => {
+    setShowMessage(true);
+    setModalContent("Undo completed");
+    setTimeout(() => {
+      setShowMessage(false); // Hide the "Item added!" message after 3 seconds
+    }, 3000);
+    const confirmed = window.confirm(
+      "Are you sure you want to undo? Note that once this action is performed, it cannot be reversed"
+    );
+
+    if (confirmed) {
+      undo();
+    }
+  };
+
+  function ConfirmationModal() {
+    return (
+      <div className="modal">
+        <div className="modal-content">
+          <h3>{modalContent}</h3>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div>
       <Modal
@@ -85,14 +115,11 @@ export default function CheckIn() {
         </div>
         <br></br>
         <h1 className="add-header">ADD ITEM</h1>
+        <button className="delete-button-undo" onClick={() => handleUndo()}>
+          Undo
+        </button>
         <div className="category-icons">
-          {showMessage && (
-            <div className="modal">
-              <div className="modal-content">
-                <h3>Item Received!</h3>
-              </div>
-            </div>
-          )}
+          {showMessage && <ConfirmationModal />}
           <button onClick={() => addCheckIn("BOOK")}>
             <div class="items">
               <img src="book.png"></img>

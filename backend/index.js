@@ -201,6 +201,39 @@ app.delete("/deletecheckin/:id", (req, res) => {
     })
 })
 
+app.delete("/deletecheckout/:id", (req, res) => {
+    const itemId = req.params.id;
+    db.query("DELETE FROM checkout WHERE id = ?", itemId, (err, result) => {
+        if(err){
+            console.log(err)
+        }else{
+            res.send(result)
+        }
+    })
+})
+
+//delete the last record from the checkin table aka the last item that was added
+app.delete("/undo/checkin", (req, res) => {
+    db.query("DELETE FROM checkin ORDER BY id DESC LIMIT 1", (err, result) => {
+        if(err){
+            console.log(err)
+        }else{
+            res.send(result)
+        }
+    })
+})
+
+//delete the last record from the checkout table aka the last item that was added
+app.delete("/undo/checkout", (req, res) => {
+    db.query("DELETE FROM checkout ORDER BY id DESC LIMIT 1", (err, result) => {
+        if(err){
+            console.log(err)
+        }else{
+            res.send(result)
+        }
+    })
+})
+
 app.put("/books/:id", (req, res) => {
     const bookId = req.params.id;
     console.log(bookId);
