@@ -20,9 +20,7 @@ export default function CheckInTable() {
   useEffect(() => {
     const fetchAllCheckIn = async () => {
       try {
-        console.log("hi inside get all check in ")
         const res = await axios.get(`${process.env.REACT_APP_DEV_LINK}/checkin`);
-        console.log("res data", res.data)
         setData(res.data);
         setLoading((prev) => !prev);
       } catch (err) {
@@ -60,10 +58,9 @@ export default function CheckInTable() {
 
   function getCategory() {
     const imp_data = cat.data.map((dataPoint) => ({
-      y: dataPoint["COUNT(category)"],
+      y: dataPoint["count(category)"],
       x: dataPoint["category"],
     }));
-    console.log(imp_data);
     setmainmageshow((prev) => !prev);
     setIsCats((prev) => !prev);
 
@@ -130,7 +127,8 @@ export default function CheckInTable() {
   };
 
   console.log("data", data)
-
+  console.log("loading", loading);
+  console.log("is array", Array.isArray(data));
   if (!loading && Array.isArray(data)) {
     if (mainpageshow) {
       return (
