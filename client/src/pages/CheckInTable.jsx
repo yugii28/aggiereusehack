@@ -6,7 +6,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
 export default function CheckInTable() {
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -24,7 +24,6 @@ export default function CheckInTable() {
         const res = await axios.get(`${process.env.REACT_APP_DEV_LINK}/checkin`);
         console.log("res data", res.data)
         setData(res.data);
-        console.log(data)
         setLoading((prev) => !prev);
       } catch (err) {
         console.log(err)
@@ -129,6 +128,8 @@ export default function CheckInTable() {
       deleteItem(id);
     }
   };
+
+  console.log("data", data)
 
   if (!loading && Array.isArray(data)) {
     if (mainpageshow) {
