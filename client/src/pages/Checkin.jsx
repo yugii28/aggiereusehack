@@ -21,7 +21,7 @@ export default function CheckIn() {
       t: text,
     };
     try {
-      await axios.post(`${process.env.DEV_LINK}/checkin`, b);
+      await axios.post(`https://aggiereusehack.vercel.app/checkin`, b);
       setShowMessage(true);
       setModalContent(`${value} added`);
       setTimeout(() => {
