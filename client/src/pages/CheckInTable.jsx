@@ -22,7 +22,9 @@ export default function CheckInTable() {
       try {
         console.log("hi inside get all check in ")
         const res = await axios.get(`${process.env.REACT_APP_DEV_LINK}/checkin`);
+        console.log("res data", res.data)
         setData(res.data);
+        console.log(data)
         setLoading((prev) => !prev);
       } catch (err) {
         console.log(err)
