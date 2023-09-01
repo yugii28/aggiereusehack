@@ -12,7 +12,6 @@ const Books = () => {
     const navigate = useNavigate();
     const [showMessage, setShowMessage] = useState(false);
 
-
     const addFootTraffic = async e => {
         try{
             await axios.post(`${process.env.DEV_LINK}/foottraffic`)
