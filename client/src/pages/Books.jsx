@@ -15,7 +15,7 @@ const Books = () => {
 
     const addFootTraffic = async e => {
         try{
-            await axios.post("http://localhost:8800/foottraffic")
+            await axios.post(`${process.env.DEV_LINK}/foottraffic`)
             setShowMessage(true);
             setTimeout(() => {
                 setShowMessage(false); // Hide the "Item added!" message after 3 seconds

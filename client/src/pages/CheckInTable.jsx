@@ -20,7 +20,7 @@ export default function CheckInTable() {
   useEffect(() => {
     const fetchAllCheckIn = async () => {
       try {
-        const res = await axios.get("http://localhost:8800/checkin");
+        const res = await axios.get(`${process.env.DEV_LINK}/checkin`);
         setData(res.data);
         setLoading((prev) => !prev);
       } catch (err) {
@@ -34,7 +34,7 @@ export default function CheckInTable() {
     const getAllCats = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8800/checkin/getallcategories"
+          `${process.env.DEV_LINK}/checkin/getallcategories`
         );
         setCat(res);
       } catch (err) {
@@ -46,7 +46,7 @@ export default function CheckInTable() {
 
   const deleteItem = (id) => {
     axios
-      .delete(`http://localhost:8800/deletecheckin/${id}`)
+      .delete(`${process.env.DEV_LINK}/deletecheckin/${id}`)
       .then((response) => {
         setData(
           data.filter((val) => {

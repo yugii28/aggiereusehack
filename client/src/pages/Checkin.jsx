@@ -21,7 +21,7 @@ export default function CheckIn() {
       t: text,
     };
     try {
-      await axios.post("http://localhost:8800/checkin", b);
+      await axios.post(`${process.env.DEV_LINK}/checkin`, b);
       setShowMessage(true);
       setModalContent(`${value} added`);
       setTimeout(() => {
@@ -33,7 +33,7 @@ export default function CheckIn() {
   }
 
   const undo = () => {
-    axios.delete(`http://localhost:8800/undo/checkin/`);
+    axios.delete(`${process.env.DEV_LINK}/undo/checkin/`);
   };
 
   const handleUndo = () => {

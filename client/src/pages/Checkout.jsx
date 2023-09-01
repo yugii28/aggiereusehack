@@ -21,7 +21,7 @@ export default function Checkout() {
       t: text,
     };
     try {
-      await axios.post("http://localhost:8800/checkout", b);
+      await axios.post(`${process.env.DEV_LINK}/checkout`, b);
       setShowMessage(true);
       setTimeout(() => {
         setShowMessage(false); // Hide the "Item added!" message after 3 seconds
@@ -32,7 +32,7 @@ export default function Checkout() {
   }
 
   const undo = () => {
-    axios.delete(`http://localhost:8800/undo/checkout/`);
+    axios.delete(`${process.env.DEV_LINK}/undo/checkout/`);
   };
 
   const handleUndo = () => {
