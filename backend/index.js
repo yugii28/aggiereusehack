@@ -1,19 +1,13 @@
 import express from "express"
 import mysql2 from "mysql2"
 import cors from 'cors'
+import dotenv from 'dotenv';
+
 const app = express()
-
-
-//learn  nodemon is
-
-
-//connecting to mysql
-const db = mysql2.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "matsukaze1",
-    database: "test"
-})
+dotenv.config()
+const connection = mysql2.createConnection(process.env.DATABASE_URL)
+console.log('Connected to PlanetScale!')
+connection.connect()
 
 //allows you to send any json file using a client
 app.use(express.json())
@@ -32,7 +26,7 @@ app.get("/", (req, res) => {
 
 app.get("/foottraffic", (req, res) => {
     const q = "SELECT * FROM foottraffic"
-    db.query(q, (err, data) => {
+    connection.query(q, (err, data) => {
         if(err) return res.json(err)
         return res.json(data)
     })
@@ -40,7 +34,7 @@ app.get("/foottraffic", (req, res) => {
 
 app.get("/checkin", (req, res) => {
     const q = "SELECT * FROM checkin"
-    db.query(q, (err, data) => {
+    connection.query(q, (err, data) => {
         if(err) return res.json(err)
         return res.json(data)
     })
@@ -48,7 +42,7 @@ app.get("/checkin", (req, res) => {
 
 app.get("/checkout", (req, res) => {
     const q = "SELECT * FROM checkout"
-    db.query(q, (err, data) => {
+    connection.query(q, (err, data) => {
         if(err) return res.json(err)
         return res.json(data)
     })
@@ -64,7 +58,7 @@ app.post("/books", (req, res) => {
         req.body.price,
     ]
     //you pass the query and the values, and it returns either an err or data
-    db.query(q, [values], (err, data) => {
+    connection.query(q, [values], (err, data) => {
         if (err) return res.json(err)
         // if the book is created successfully, sql returns that back
         return res.json("Book has been created successfully");
@@ -89,7 +83,7 @@ app.post("/foottraffic", (req, res) => {
         fullDate
     ]
     //you pass the query and the values, and it returns either an err or data
-    db.query(q, [values], (err, data) => {
+    connection.query(q, [values], (err, data) => {
         if (err){
             console.log(err)
             res.json(err)
@@ -101,7 +95,7 @@ app.post("/foottraffic", (req, res) => {
 
 app.get("/foottraffic/getalldays", (req, res) => {
     const q = "SELECT COUNT(day),day FROM foottraffic GROUP BY day"
-    db.query(q, (err, data) => {
+    connection.query(q, (err, data) => {
         if(err){
             console.log(err)
             return res.json(err)
@@ -112,7 +106,7 @@ app.get("/foottraffic/getalldays", (req, res) => {
 
 app.get("/foottraffic/getallhours", (req, res) => {
     const q = "SELECT COUNT(hour),hour FROM foottraffic GROUP BY hour"
-    db.query(q, (err, data) => {
+    connection.query(q, (err, data) => {
         if(err){
             console.log(err)
             return res.json(err)
@@ -123,7 +117,7 @@ app.get("/foottraffic/getallhours", (req, res) => {
 
 app.get("/foottraffic/getallweeks", (req, res) => {
     const q = "SELECT COUNT(hour),hour FROM foottraffic GROUP BY hour"
-    db.query(q, (err, data) => {
+    connection.query(q, (err, data) => {
         if(err){
             console.log(err)
             return res.json(err)
@@ -151,7 +145,7 @@ app.post("/checkin", (req, res) => {
         fullDate
     ]
     //you pass the query and the values, and it returns either an err or data
-    db.query(q, [values], (err, data) => {
+    connection.query(q, [values], (err, data) => {
         if (err){
             // console.log(err)
             return res.json(err)
@@ -179,7 +173,7 @@ app.post("/checkout", (req, res) => {
         fullDate
     ]
     //you pass the query and the values, and it returns either an err or data
-    db.query(q, [values], (err, data) => {
+    connection.query(q, [values], (err, data) => {
         if (err){
             console.log(err)
             return res.json(err)
@@ -192,7 +186,7 @@ app.post("/checkout", (req, res) => {
 
 app.delete("/deletecheckin/:id", (req, res) => {
     const itemId = req.params.id;
-    db.query("DELETE FROM checkin WHERE id = ?", itemId, (err, result) => {
+    connection.query("DELETE FROM checkin WHERE id = ?", itemId, (err, result) => {
         if(err){
             console.log(err)
         }else{
@@ -203,7 +197,7 @@ app.delete("/deletecheckin/:id", (req, res) => {
 
 app.delete("/deletecheckout/:id", (req, res) => {
     const itemId = req.params.id;
-    db.query("DELETE FROM checkout WHERE id = ?", itemId, (err, result) => {
+    connection.query("DELETE FROM checkout WHERE id = ?", itemId, (err, result) => {
         if(err){
             console.log(err)
         }else{
@@ -214,7 +208,7 @@ app.delete("/deletecheckout/:id", (req, res) => {
 
 //delete the last record from the checkin table aka the last item that was added
 app.delete("/undo/checkin", (req, res) => {
-    db.query("DELETE FROM checkin ORDER BY id DESC LIMIT 1", (err, result) => {
+    connection.query("DELETE FROM checkin ORDER BY id DESC LIMIT 1", (err, result) => {
         if(err){
             console.log(err)
         }else{
@@ -225,7 +219,7 @@ app.delete("/undo/checkin", (req, res) => {
 
 //delete the last record from the checkout table aka the last item that was added
 app.delete("/undo/checkout", (req, res) => {
-    db.query("DELETE FROM checkout ORDER BY id DESC LIMIT 1", (err, result) => {
+    connection.query("DELETE FROM checkout ORDER BY id DESC LIMIT 1", (err, result) => {
         if(err){
             console.log(err)
         }else{
@@ -243,12 +237,13 @@ app.put("/books/:id", (req, res) => {
         req.body.desc,
         req.body.price, 
     ]
-    db.query(q, [...values, bookId], (err, data) => {
+    connection.query(q, [...values, bookId], (err, data) => {
         if (err) return res.json(err)
         // if the book is created successfully, sql returns that back
         return res.json("Book has been updated successfully");
     })
 })
+
 //idk
 app.listen(8800, ()=> {
     console.log("Connected to backend")
@@ -256,7 +251,7 @@ app.listen(8800, ()=> {
 
 app.get("/checkout/getallcategories", (req, res) => {
     const q = "SELECT COUNT(category),category FROM checkout GROUP BY category"
-    db.query(q, (err, data) => {
+    connection.query(q, (err, data) => {
         if(err){
             console.log(err)
             return res.json(err)
@@ -267,7 +262,7 @@ app.get("/checkout/getallcategories", (req, res) => {
 
 app.get("/checkin/getallcategories", (req, res) => {
     const q = "SELECT COUNT(category),category FROM checkin GROUP BY category"
-    db.query(q, (err, data) => {
+    connection.query(q, (err, data) => {
         if(err){
             console.log(err)
             return res.json(err)
