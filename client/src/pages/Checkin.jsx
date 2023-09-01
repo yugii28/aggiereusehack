@@ -14,14 +14,14 @@ export default function CheckIn() {
   const [form, setForm] = useState();
   const [showMessage, setShowMessage] = useState(false);
   const [modalContent, setModalContent] = useState("");
-
+  console.log("check in", process.env.REACT_APP_DEV_LINK)
   async function addCheckIn(value) {
     const text = value;
     const b = {
       t: text,
     };
     try {
-      await axios.post(`https://aggiereusehack.vercel.app/checkin`, b);
+      await axios.post(`${process.env.REACT_APP_DEV_LINK}/checkin`, b);
       setShowMessage(true);
       setModalContent(`${value} added`);
       setTimeout(() => {
@@ -33,7 +33,7 @@ export default function CheckIn() {
   }
 
   const undo = () => {
-    axios.delete(`${process.env.DEV_LINK}/undo/checkin/`);
+    axios.delete(`${process.env.REACT_APP_REACT_APP_DEV_LINK}/undo/checkin/`);
   };
 
   const handleUndo = () => {

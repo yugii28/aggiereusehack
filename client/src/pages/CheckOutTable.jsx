@@ -19,7 +19,7 @@ export default function CheckOutTable() {
   useEffect(() => {
     const fetchAllCheckOut = async () => {
       try {
-        const res = await axios.get(`${process.env.DEV_LINK}/checkout`);
+        const res = await axios.get(`${process.env.REACT_APP_DEV_LINK}/checkout`);
         setData(res.data);
         setLoading((prev) => !prev);
       } catch (err) {
@@ -33,7 +33,7 @@ export default function CheckOutTable() {
     const getAllCats = async () => {
       try {
         const res = await axios.get(
-          `${process.env.DEV_LINK}/checkout/getallcategories`
+          `${process.env.REACT_APP_DEV_LINK}/checkout/getallcategories`
         );
         setCat(res);
       } catch (err) {
@@ -45,7 +45,7 @@ export default function CheckOutTable() {
 
   const deleteItem = (id) => {
     axios
-      .delete(`${process.env.DEV_LINK}/deletecheckout/${id}`)
+      .delete(`${process.env.REACT_APP_DEV_LINK}/deletecheckout/${id}`)
       .then((response) => {
         setData(
           data.filter((val) => {

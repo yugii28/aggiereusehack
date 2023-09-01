@@ -31,7 +31,7 @@ export default function FootTrafficTable(){
         const fetchAllBooks = async () => {
             
             try {
-                const res = await axios.get(`${process.env.DEV_LINK}/foottraffic`)
+                const res = await axios.get(`${process.env.REACT_APP_DEV_LINK}/foottraffic`)
                 setData(res.data)
                 setLoading(prev => !prev)
             }
@@ -45,7 +45,7 @@ export default function FootTrafficTable(){
     useEffect(() => {
         const getAllDays = async() => {
             try {
-                const res = await axios.get(`${process.env.DEV_LINK}/foottraffic/getalldays`)
+                const res = await axios.get(`${process.env.REACT_APP_DEV_LINK}/foottraffic/getalldays`)
                 setDays(res)
             }
             catch(err){
@@ -73,7 +73,7 @@ export default function FootTrafficTable(){
     useEffect(() => {
         const getAllHours = async() => {
             try {
-                const res = await axios.get(`${process.env.DEV_LINK}/foottraffic/getallhours`)
+                const res = await axios.get(`${process.env.REACT_APP_DEV_LINK}/foottraffic/getallhours`)
                 setHours(res)
             }
             catch(err){

@@ -21,7 +21,7 @@ export default function Checkout() {
       t: text,
     };
     try {
-      await axios.post(`${process.env.DEV_LINK}/checkout`, b);
+      await axios.post(`${process.env.REACT_APP_DEV_LINK}/checkout`, b);
       setShowMessage(true);
       setTimeout(() => {
         setShowMessage(false); // Hide the "Item added!" message after 3 seconds
@@ -32,7 +32,7 @@ export default function Checkout() {
   }
 
   const undo = () => {
-    axios.delete(`${process.env.DEV_LINK}/undo/checkout/`);
+    axios.delete(`${process.env.REACT_APP_DEV_LINK}/undo/checkout/`);
   };
 
   const handleUndo = () => {
