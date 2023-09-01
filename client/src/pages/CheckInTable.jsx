@@ -14,12 +14,13 @@ export default function CheckInTable() {
   const [showMessage, setShowMessage] = useState(false);
   const [mainpageshow, setmainmageshow] = useState(true);
   const [isCats, setIsCats] = useState();
-
+  console.log(process.env.REACT_APP_DEV_LINK);
   const [options, setOptions] = useState();
 
   useEffect(() => {
     const fetchAllCheckIn = async () => {
       try {
+        console.log("hi inside get all check in ")
         const res = await axios.get(`${process.env.REACT_APP_DEV_LINK}/checkin`);
         setData(res.data);
         setLoading((prev) => !prev);
