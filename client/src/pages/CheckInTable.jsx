@@ -12,7 +12,7 @@ export default function CheckInTable() {
 
   const [cat, setCat] = useState();
   const [showMessage, setShowMessage] = useState(false);
-  const [mainpageshow, setmainmageshow] = useState(true);
+  const [mainPageShow, setmainPageShow] = useState(true);
   const [isCats, setIsCats] = useState();
   const [options, setOptions] = useState();
 
@@ -60,7 +60,7 @@ export default function CheckInTable() {
       y: dataPoint["count(category)"],
       x: dataPoint["category"],
     }));
-    setmainmageshow((prev) => !prev);
+    setmainPageShow((prev) => !prev);
     setIsCats((prev) => !prev);
 
     const options = {
@@ -126,7 +126,7 @@ export default function CheckInTable() {
   };
 
   if (!loading && Array.isArray(data)) {
-    if (mainpageshow) {
+    if (mainPageShow) {
       return (
         <div>
           <div class="main-body1">
@@ -251,7 +251,7 @@ export default function CheckInTable() {
               <div align="right">
                 <button
                   className="previous"
-                  onClick={() => setmainmageshow((prev) => !prev)}
+                  onClick={() => setmainPageShow((prev) => !prev)}
                 >
                   <img src="/previous1.svg" height="50px"></img>
                 </button>
