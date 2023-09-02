@@ -33,7 +33,7 @@ export default function CheckIn() {
   }
 
   const undo = () => {
-    axios.delete(`${process.env.REACT_APP_REACT_APP_DEV_LINK}/undo/checkin/`);
+    axios.delete(`${process.env.REACT_APP_DEV_LINK}/undo/checkin/`);
   };
 
   const handleUndo = () => {
