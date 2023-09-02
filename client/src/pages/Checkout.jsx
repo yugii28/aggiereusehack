@@ -23,6 +23,7 @@ export default function Checkout() {
     try {
       await axios.post(`${process.env.REACT_APP_DEV_LINK}/checkout`, b);
       setShowMessage(true);
+      setModalContent(`${value} added`);
       setTimeout(() => {
         setShowMessage(false); // Hide the "Item added!" message after 3 seconds
       }, 1000);

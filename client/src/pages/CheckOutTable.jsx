@@ -7,7 +7,7 @@ import HighchartsReact from "highcharts-react-official";
 
 export default function CheckOutTable() {
   const [data, setData] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const [cat, setCat] = useState();
@@ -21,9 +21,9 @@ export default function CheckOutTable() {
       try {
         const res = await axios.get(`${process.env.REACT_APP_DEV_LINK}/checkout`);
         setData(res.data);
-        setLoading((prev) => !prev);
+        setLoading(false);
       } catch (err) {
-        // console.log(err)
+        console.log(err)
       }
     };
     fetchAllCheckOut();
@@ -37,7 +37,7 @@ export default function CheckOutTable() {
         );
         setCat(res);
       } catch (err) {
-        // console.log(err)
+        console.log(err)
       }
     };
     getAllCats();
@@ -57,7 +57,7 @@ export default function CheckOutTable() {
 
   function getCategory() {
     const imp_data = cat.data.map((dataPoint) => ({
-      y: dataPoint["COUNT(category)"],
+      y: dataPoint["count(category)"],
       x: dataPoint["category"],
     }));
     console.log(imp_data);

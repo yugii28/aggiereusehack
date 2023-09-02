@@ -14,7 +14,6 @@ export default function CheckInTable() {
   const [showMessage, setShowMessage] = useState(false);
   const [mainpageshow, setmainmageshow] = useState(true);
   const [isCats, setIsCats] = useState();
-  console.log(process.env.REACT_APP_DEV_LINK);
   const [options, setOptions] = useState();
 
   useEffect(() => {
@@ -38,7 +37,7 @@ export default function CheckInTable() {
         );
         setCat(res);
       } catch (err) {
-        // console.log(err)
+        console.log(err)
       }
     };
     getAllCats();
@@ -126,9 +125,6 @@ export default function CheckInTable() {
     }
   };
 
-  console.log("data", data)
-  console.log("loading", loading);
-  console.log("is array", Array.isArray(data));
   if (!loading && Array.isArray(data)) {
     if (mainpageshow) {
       return (
