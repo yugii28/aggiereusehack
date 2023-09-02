@@ -7,7 +7,7 @@ import HighchartsReact from "highcharts-react-official";
 
 export default function CheckInTable() {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const [cat, setCat] = useState();
@@ -22,7 +22,7 @@ export default function CheckInTable() {
       try {
         const res = await axios.get(`${process.env.REACT_APP_DEV_LINK}/checkin`);
         setData(res.data);
-        setLoading((prev) => !prev);
+        setLoading(false);
       } catch (err) {
         console.log(err)
       }
