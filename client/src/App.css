@@ -210,13 +210,6 @@ button{
   opacity: 0.5;
 }
 
-table{
-  display: block;
-  width: 60%!important;
-  margin-left: 18%;
-  margin-right: 10%;
-}
-
 th{
   text-align: center!important;
   width: 10%!important;
@@ -261,6 +254,9 @@ td{
 .charts{
   width: 90%;
   margin: auto;
+  border: 1px solid black;
+  margin-top: 10vw;
+  border-radius: 10px;
 }
 
 .previous{
@@ -274,8 +270,11 @@ td{
 }
 
 .checktable{
-  height: 400px;
-  overflow-y: scroll;
+  max-width: 90vw;
+  overflow-x: auto;
+  margin: auto;
+  height: 70vh;
+  overflow-y: auto;
 }
 
 .modal {
@@ -321,6 +320,23 @@ td{
 
 .text-at-top {
   text-align: center;
+}
+
+ table, th, td {
+  border: 0.1px solid black;
+  border-collapse: collapse;
+}
+
+th {
+  padding: 1vw 2vw;
+}
+
+td {
+  padding: 1vw 2vw;
+}
+
+tr:nth-child(even) {
+  background-color: #e3e0e0;
 }
 
 @media screen and (max-width: 480px) {

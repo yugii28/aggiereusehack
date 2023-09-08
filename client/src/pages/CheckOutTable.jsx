@@ -19,11 +19,13 @@ export default function CheckOutTable() {
   useEffect(() => {
     const fetchAllCheckOut = async () => {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_DEV_LINK}/checkout`);
+        const res = await axios.get(
+          `${process.env.REACT_APP_DEV_LINK}/checkout`
+        );
         setData(res.data);
         setLoading(false);
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     };
     fetchAllCheckOut();
@@ -37,7 +39,7 @@ export default function CheckOutTable() {
         );
         setCat(res);
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     };
     getAllCats();
@@ -115,8 +117,8 @@ export default function CheckOutTable() {
   const handleDelete = (id) => {
     setShowMessage(true);
     setTimeout(() => {
-        setShowMessage(false); // Hide the "Item added!" message after 3 seconds
-      }, 3000);
+      setShowMessage(false); // Hide the "Item added!" message after 3 seconds
+    }, 3000);
     const confirmed = window.confirm(
       "Are you sure you want to delete this item? Note that once deleted, the item can never be recovered."
     );
@@ -157,57 +159,51 @@ export default function CheckOutTable() {
               DATABASE FOR GIVEAWAYS
             </h1>
             <div className="checktable">
-              <Table striped highlightOnHover withBorder withColumnBorders>
-                <thead>
-                  <tr>
-                    <th>Item Number</th>
-                    <th>Day</th>
-                    <th>Hour</th>
-                    <th>Date</th>
-                    <th>Category</th>
-                    <th>Delete</th>
+              <table>
+                <tr>
+                  <th>Item Number</th>
+                  <th>Day</th>
+                  <th>Hour</th>
+                  <th>Date</th>
+                  <th>Category</th>
+                  <th>Delete</th>
+                </tr>
+                {data.map((element) => (
+                  <tr key={element.id}>
+                    <td>{element.id}</td>
+                    <td>
+                      {element.day == 0
+                        ? "Sunday"
+                        : element.day == 1
+                        ? "Monday"
+                        : element.day == 2
+                        ? "Tuesday"
+                        : element.day == 3
+                        ? "Wednesday"
+                        : element.day == 4
+                        ? "Thursday"
+                        : element.day == 5
+                        ? "Friday"
+                        : element.day == 6
+                        ? "Saturday"
+                        : null}
+                    </td>
+                    <td>{element.hour}</td>
+                    <td>{element.date ? element.date.split("T")[0] : null}</td>
+                    <td>{element.category}</td>
+                    <td>
+                      <button
+                        className="delete-button"
+                        onClick={() => {
+                          handleDelete(element.id);
+                        }}
+                      >
+                        Delete Item
+                      </button>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {data.map((element) => (
-                    <tr key={element.id}>
-                      <td>{element.id}</td>
-                      <td>
-                        {element.day == 0
-                          ? "Sunday"
-                          : element.day == 1
-                          ? "Monday"
-                          : element.day == 2
-                          ? "Tuesday"
-                          : element.day == 3
-                          ? "Wednesday"
-                          : element.day == 4
-                          ? "Thursday"
-                          : element.day == 5
-                          ? "Friday"
-                          : element.day == 6
-                          ? "Saturday"
-                          : null}
-                      </td>
-                      <td>{element.hour}</td>
-                      <td>
-                        {element.date ? element.date.split("T")[0] : null}
-                      </td>
-                      <td>{element.category}</td>
-                      <td>
-                        <button
-                          className="delete-button"
-                          onClick={() => {
-                            handleDelete(element.id);
-                          }}
-                        >
-                          Delete Item
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
+                ))}
+              </table>
             </div>
             <div class="model-choice-row">
               <h1 align="center">GENERATE VISUAL TRENDS BY</h1>

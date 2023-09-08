@@ -157,8 +157,7 @@ export default function CheckInTable() {
               DATABASE FOR DONATIONS
             </h1>
             <div class="checktable">
-              <Table striped highlightOnHover withBorder withColumnBorders>
-                <thead>
+              <table>
                   <tr>
                     <th>Item Number</th>
                     <th>Day</th>
@@ -167,8 +166,6 @@ export default function CheckInTable() {
                     <th>Category</th>
                     <th>Delete</th>
                   </tr>
-                </thead>
-                <tbody>
                   {data.map((element) => (
                     <tr key={element.id}>
                       <td>{element.id}</td>
@@ -191,7 +188,8 @@ export default function CheckInTable() {
                       </td>
                       <td>{element.hour}</td>
                       <td>
-                        {element.date ? element.date.split("T")[0] : null}
+                        {/* {element.date ? element.date.split("T")[0] : null} */}
+                        hi
                       </td>
                       <td>{element.category}</td>
                       <td>
@@ -206,8 +204,7 @@ export default function CheckInTable() {
                       </td>
                     </tr>
                   ))}
-                </tbody>
-              </Table>
+              </table>
             </div>
             {showMessage && (
               <div className="modal">
