@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function FootTrafficTable() {
   const [data, setData] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [days, setDays] = useState();
   const [impData, setImpData] = useState();
@@ -17,10 +17,6 @@ export default function FootTrafficTable() {
   const [hours, setHours] = useState();
   const [hoursHighcharts, setHoursHighcharts] = useState();
   const [isHours, setIsHours] = useState(false);
-
-  const [weeks, setWeeks] = useState();
-  const [weeksHighcharts, setWeeksHighcharts] = useState();
-  const [isWeeks, setIsWeeks] = useState(false);
 
   const [mainpageshow, setmainmageshow] = useState(true);
   const navigate = useNavigate();
@@ -32,7 +28,7 @@ export default function FootTrafficTable() {
           `${process.env.REACT_APP_DEV_LINK}/foottraffic`
         );
         setData(res.data);
-        setLoading((prev) => !prev);
+        setLoading(false);
       } catch (err) {
         // console.log(err)
       }
@@ -67,8 +63,6 @@ export default function FootTrafficTable() {
   //     getAllWeeks()
   // }, [])
 
-  console.log("days", days);
-
   useEffect(() => {
     const getAllHours = async () => {
       try {
@@ -84,33 +78,18 @@ export default function FootTrafficTable() {
   }, []);
 
   function handleclick() {
-    // console.log("hi")
-    // console.log("days", days)
-    // console.log(hours.data)
-    // console.log(hours.data[0])
-
     const imp_data = days.data.map((dataPoint) => ({
-      y: dataPoint["COUNT(day)"],
+      y: dataPoint["count(day)"],
       x: dataPoint["day"],
     }));
     setImpData(imp_data);
-
-    // for (let i = 0; i < imp_data.length; i++){
-    //     if(imp_data[i]["x"] == 1){
-    //         imp_data[i]["x"] = "Monday"
-    //     }
-    // }
-    // for(let i = 0; i < hours.data.length; i++){
-    //     console.log(hours.data[i]["COUNT(day)"])
-    //     console.log(hours.data[i].day)
-    // }
     setmainmageshow((prev) => !prev);
     setIsDays((prev) => !prev);
   }
 
   function handleHours() {
     const imp_data = hours.data.map((dataPoint) => ({
-      y: dataPoint["COUNT(hour)"],
+      y: dataPoint["count(hour)"],
       x: dataPoint["hour"],
     }));
     setHoursHighcharts(imp_data);
@@ -305,7 +284,6 @@ export default function FootTrafficTable() {
         </div>
       );
     } else if (isDays && !isHours) {
-      console.log("days", impData);
       return (
         <div>
           <div class="main-body1">
@@ -350,7 +328,6 @@ export default function FootTrafficTable() {
         </div>
       );
     } else if (isHours && !isDays) {
-      console.log("hours", hoursHighcharts);
       return (
         <div>
           <div class="main-body1">
