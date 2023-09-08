@@ -114,6 +114,8 @@ export default function CheckOutTable() {
     setOptions(options);
   }
 
+  console.log(data)
+
   const handleDelete = (id) => {
     setShowMessage(true);
     setTimeout(() => {
@@ -163,7 +165,7 @@ export default function CheckOutTable() {
                 <tr>
                   <th>Item Number</th>
                   <th>Day</th>
-                  <th>Hour</th>
+                  <th>Time</th>
                   <th>Date</th>
                   <th>Category</th>
                   <th>Delete</th>
@@ -188,7 +190,7 @@ export default function CheckOutTable() {
                         ? "Saturday"
                         : null}
                     </td>
-                    <td>{element.hour}</td>
+                    <td>{element.hour + ":" + element.minutes}</td>
                     <td>{element.date ? element.date.split("T")[0] : null}</td>
                     <td>{element.category}</td>
                     <td>

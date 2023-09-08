@@ -14,14 +14,14 @@ export default function CheckIn() {
   const [form, setForm] = useState();
   const [showMessage, setShowMessage] = useState(false);
   const [modalContent, setModalContent] = useState("");
-  console.log("check in", process.env.REACT_APP_DEV_LINK);
   async function addCheckIn(value) {
     const text = value;
     const b = {
       t: text,
     };
     try {
-      await axios.post(`${process.env.REACT_APP_DEV_LINK}/checkin`, b);
+      const response = await axios.post(`${process.env.REACT_APP_DEV_LINK}/checkin`, b);
+      console.log("no", response)
       setShowMessage(true);
       setModalContent(`${value} added`);
       setTimeout(() => {

@@ -240,7 +240,7 @@ export default function FootTrafficTable() {
             <div className="checktable">
               <table>
                 <tr>
-                  <th>ID</th>
+                  <th>Number</th>
                   <th>Day</th>
                   <th>Hour</th>
                   <th>Date</th>
