@@ -50,37 +50,23 @@ app.get("/checkout", (req, res) => {
 
 //creating new data using node- you can only test this using postman, which allows you to make api requests
 //in other words, writing the data to the database
-app.post("/books", (req, res) => {
-    const q = "INSERT INTO books (`title`, `desc`, `price`) VALUES (?)";
-    const values = [
-        req.body.title,
-        req.body.desc,
-        req.body.price,
-    ]
-    //you pass the query and the values, and it returns either an err or data
-    connection.query(q, [values], (err, data) => {
-        if (err) return res.json(err)
-        // if the book is created successfully, sql returns that back
-        return res.json("Book has been created successfully");
-    })
-})
-
-
 app.post("/foottraffic", (req, res) => {
     const currentDate = new Date();
     const day = currentDate.getDay()
     const hour = currentDate.getHours();
+    const minutes = currentDate.getMinutes();
 
     const date = currentDate.getDate(); //20,21 etc
     const month = currentDate.getMonth() + 1; //starts from 0 so add 1
     const year = currentDate.getFullYear();
     const fullDate = `${year}-${month}-${date}`;
 
-    const q = "INSERT INTO foottraffic (`day`, `hour`, `date`) VALUES (?)";
+    const q = "INSERT INTO foottraffic (`day`, `hour`, `date`, `minutes`) VALUES (?)";
     const values = [
         day,
         hour,
-        fullDate
+        fullDate,
+        minutes
     ]
     //you pass the query and the values, and it returns either an err or data
     connection.query(q, [values], (err, data) => {
@@ -131,18 +117,20 @@ app.post("/checkin", (req, res) => {
     const currentDate = new Date();
     const day = currentDate.getDay()
     const hour = currentDate.getHours();
+    const minutes = currentDate.getMinutes();
 
     const date = currentDate.getDate(); //20,21 etc
     const month = currentDate.getMonth() + 1; //starts from 0 so add 1
     const year = currentDate.getFullYear();
     const fullDate = `${year}-${month}-${date}`;
 
-    const q = "INSERT INTO checkin (`day`, `hour`, `category`, `date`) VALUES (?)";
+    // const q = "INSERT INTO checkin (`day`, `hour`, `category`, `date`, `minutes`) VALUES (?)";
     const values = [
         day,
         hour,
         req.body.t,
-        fullDate
+        fullDate,
+        minutes
     ]
     //you pass the query and the values, and it returns either an err or data
     connection.query(q, [values], (err, data) => {
@@ -159,18 +147,19 @@ app.post("/checkout", (req, res) => {
     const currentDate = new Date();
     const day = currentDate.getDay()
     const hour = currentDate.getHours();
-
+    const minutes = currentDate.getDay();
     const date = currentDate.getDate(); //20,21 etc
     const month = currentDate.getMonth() + 1; //starts from 0 so add 1
     const year = currentDate.getFullYear();
     const fullDate = `${year}-${month}-${date}`;
 
-    const q = "INSERT INTO checkout (`day`, `hour`, `category`, `date`) VALUES (?)";
+    const q = "INSERT INTO checkout (`day`, `hour`, `category`, `date`, `minutes`) VALUES (?)";
     const values = [
         day,
         hour,
         req.body.t,
-        fullDate
+        fullDate,
+        minutes
     ]
     //you pass the query and the values, and it returns either an err or data
     connection.query(q, [values], (err, data) => {
@@ -186,13 +175,13 @@ app.post("/checkout", (req, res) => {
 
 app.delete("/deletecheckin/:id", (req, res) => {
     const itemId = req.params.id;
-    connection.query("DELETE FROM checkin WHERE id = ?", itemId, (err, result) => {
+    // connection.query("DELETE FROM checkin WHERE id = ?", itemId, (err, result) => {
         if(err){
             console.log(err)
         }else{
             res.send(result)
         }
-    })
+    // })
 })
 
 app.delete("/deletecheckout/:id", (req, res) => {
