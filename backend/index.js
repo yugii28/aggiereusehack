@@ -123,8 +123,8 @@ app.post("/checkin", (req, res) => {
     const month = currentDate.getMonth() + 1; //starts from 0 so add 1
     const year = currentDate.getFullYear();
     const fullDate = `${year}-${month}-${date}`;
-
-    // const q = "INSERT INTO checkin (`day`, `hour`, `category`, `date`, `minutes`) VALUES (?)";
+    console.log(minutes)
+    const q = "INSERT INTO checkin (`day`, `hour`, `category`, `date`, `minutes`) VALUES (?)";
     const values = [
         day,
         hour,
@@ -147,12 +147,12 @@ app.post("/checkout", (req, res) => {
     const currentDate = new Date();
     const day = currentDate.getDay()
     const hour = currentDate.getHours();
-    const minutes = currentDate.getDay();
+    const minutes = currentDate.getMinutes();
     const date = currentDate.getDate(); //20,21 etc
     const month = currentDate.getMonth() + 1; //starts from 0 so add 1
     const year = currentDate.getFullYear();
     const fullDate = `${year}-${month}-${date}`;
-
+    console.log(minutes)
     const q = "INSERT INTO checkout (`day`, `hour`, `category`, `date`, `minutes`) VALUES (?)";
     const values = [
         day,
