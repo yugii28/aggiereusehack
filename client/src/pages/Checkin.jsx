@@ -14,7 +14,7 @@ export default function CheckIn() {
   const [form, setForm] = useState();
   const [showMessage, setShowMessage] = useState(false);
   const [modalContent, setModalContent] = useState("");
-  console.log("check in", process.env.REACT_APP_DEV_LINK)
+  console.log("check in", process.env.REACT_APP_DEV_LINK);
   async function addCheckIn(value) {
     const text = value;
     const b = {
@@ -109,15 +109,17 @@ export default function CheckIn() {
           </nav>
           <button onClick={() => navigate("/check-in-table")}>
             <h1 class="inspect-data">
-              INSPECT <br></br>DATA
+              INSPECT <br></br>DONATION DATA
             </h1>
           </button>
         </div>
         <br></br>
-        <h1 className="add-header">ADD ITEM</h1>
-        <button className="delete-button-undo" onClick={() => handleUndo()}>
-          Undo
-        </button>
+        <div className="text-at-top">
+          <h1 className="add-header">ADD ITEM</h1>
+          <button className="delete-button-undo" onClick={() => handleUndo()}>
+            Undo
+          </button>
+        </div>
         <div className="category-icons">
           {showMessage && <ConfirmationModal />}
           <button onClick={() => addCheckIn("BOOK")}>

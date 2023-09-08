@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 
-
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -38,6 +37,14 @@ body {
 
 .navbar-alpha h1{
   margin-right: 20px;
+}
+
+.navbar-alpha button h1 {
+  padding: 20px 20px;
+}
+
+.navbar-alpha1 button h1 {
+  padding: 20px 20px;
 }
 
 .inspect-data{
@@ -83,8 +90,8 @@ body {
 }
 
 .main-body{
-  background-color: #032851;
   height: 100vh;
+  background-color: #032851;
 }
 
 .image-choose{
@@ -92,6 +99,8 @@ body {
   flex-direction: row;
   justify-content: space-evenly;
   margin-top: 10%;
+  flex-wrap: wrap;
+  background-color: #032851;
 }
 
 .curve-img{
@@ -130,6 +139,7 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  background-color: #032851;
 }
 
 .category-icons img{
@@ -138,6 +148,10 @@ body {
   margin-top: 20px;
   margin-left: 80px;
   margin-right: 80px;
+}
+
+.category-icons button {
+  margin-bottom: 20px;
 }
 
 .items{
@@ -303,4 +317,18 @@ td{
   border-radius: 10px;
   cursor: pointer;
   margin-left: 30px;
+}
+
+.text-at-top {
+  text-align: center;
+}
+
+@media screen and (max-width: 480px) {
+  .column1 {
+    display: none;
+  }
+
+  .navbar-alpha button h1 {
+    padding: 5px 15px;
+  }
 }

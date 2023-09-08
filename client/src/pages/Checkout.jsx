@@ -109,15 +109,17 @@ export default function Checkout() {
           </nav>
           <button onClick={() => navigate("/check-out-table")}>
             <h1 class="inspect-data">
-              INSPECT <br></br>DATA
+              INSPECT <br></br>CHECKOUT DATA
             </h1>
           </button>
         </div>
         <br></br>
-        <h1 className="add-header">DONATE ITEM</h1>
-        <button className="delete-button-undo" onClick={() => handleUndo()}>
-          Undo
-        </button>
+        <div className="text-at-top">
+          <h1 className="add-header">DONATE ITEM</h1>
+          <button className="delete-button-undo" onClick={() => handleUndo()}>
+            Undo
+          </button>
+        </div>
         <div className="category-icons">
           {showMessage && <ConfirmationModal />}
           <button onClick={() => addCheckout("BOOK")}>
