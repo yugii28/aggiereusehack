@@ -19,11 +19,13 @@ export default function CheckInTable() {
   useEffect(() => {
     const fetchAllCheckIn = async () => {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_DEV_LINK}/checkin`);
+        const res = await axios.get(
+          `${process.env.REACT_APP_DEV_LINK}/checkin`
+        );
         setData(res.data);
         setLoading(false);
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     };
     fetchAllCheckIn();
@@ -37,7 +39,7 @@ export default function CheckInTable() {
         );
         setCat(res);
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     };
     getAllCats();
@@ -158,52 +160,49 @@ export default function CheckInTable() {
             </h1>
             <div class="checktable">
               <table>
-                  <tr>
-                    <th>Item Number</th>
-                    <th>Day</th>
-                    <th>Hour</th>
-                    <th>Date</th>
-                    <th>Category</th>
-                    <th>Delete</th>
+                <tr>
+                  <th>Item Number</th>
+                  <th>Day</th>
+                  <th>Hour</th>
+                  <th>Date</th>
+                  <th>Category</th>
+                  <th>Delete</th>
+                </tr>
+                {data.map((element) => (
+                  <tr key={element.id}>
+                    <td>{element.id}</td>
+                    <td>
+                      {element.day == 0
+                        ? "Sunday"
+                        : element.day == 1
+                        ? "Monday"
+                        : element.day == 2
+                        ? "Tuesday"
+                        : element.day == 3
+                        ? "Wednesday"
+                        : element.day == 4
+                        ? "Thursday"
+                        : element.day == 5
+                        ? "Friday"
+                        : element.day == 6
+                        ? "Saturday"
+                        : null}
+                    </td>
+                    <td>{element.hour + ":" + element.minutes}</td>
+                    <td>{element.date ? element.date.split("T")[0] : null}</td>
+                    <td>{element.category}</td>
+                    <td>
+                      <button
+                        className="delete-button"
+                        onClick={() => {
+                          handleDelete(element.id);
+                        }}
+                      >
+                        Delete Item
+                      </button>
+                    </td>
                   </tr>
-                  {data.map((element) => (
-                    <tr key={element.id}>
-                      <td>{element.id}</td>
-                      <td>
-                        {element.day == 0
-                          ? "Sunday"
-                          : element.day == 1
-                          ? "Monday"
-                          : element.day == 2
-                          ? "Tuesday"
-                          : element.day == 3
-                          ? "Wednesday"
-                          : element.day == 4
-                          ? "Thursday"
-                          : element.day == 5
-                          ? "Friday"
-                          : element.day == 6
-                          ? "Saturday"
-                          : null}
-                      </td>
-                      <td>{element.hour}</td>
-                      <td>
-                        {/* {element.date ? element.date.split("T")[0] : null} */}
-                        hi
-                      </td>
-                      <td>{element.category}</td>
-                      <td>
-                        <button
-                          className="delete-button"
-                          onClick={() => {
-                            handleDelete(element.id);
-                          }}
-                        >
-                          Delete Item
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                ))}
               </table>
             </div>
             {showMessage && (

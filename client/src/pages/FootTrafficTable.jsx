@@ -242,7 +242,7 @@ export default function FootTrafficTable() {
                 <tr>
                   <th>Number</th>
                   <th>Day</th>
-                  <th>Hour</th>
+                  <th>Time</th>
                   <th>Date</th>
                 </tr>
                 {data.map((element) => (
@@ -265,7 +265,7 @@ export default function FootTrafficTable() {
                         ? "Saturday"
                         : null}
                     </td>
-                    <td>{element.hour}</td>
+                    <td>{element.hour + ":" + element.minutes}</td>
                     <td>{element.date ? element.date.split("T")[0] : null}</td>
                   </tr>
                 ))}
