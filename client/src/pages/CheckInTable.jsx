@@ -163,7 +163,7 @@ export default function CheckInTable() {
                 <tr>
                   <th>Item Number</th>
                   <th>Day</th>
-                  <th>Hour</th>
+                  <th>Time</th>
                   <th>Date</th>
                   <th>Category</th>
                   <th>Delete</th>
@@ -188,7 +188,13 @@ export default function CheckInTable() {
                         ? "Saturday"
                         : null}
                     </td>
-                    <td>{element.hour + ":" + element.minutes}</td>
+                    <td>
+                      {element.hour +
+                        ":" +
+                        (element.minutes.toString().length == 1
+                          ? "0" + element.minutes
+                          : element.minutes)}
+                    </td>
                     <td>{element.date ? element.date.split("T")[0] : null}</td>
                     <td>{element.category}</td>
                     <td>

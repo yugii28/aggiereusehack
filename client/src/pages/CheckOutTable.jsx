@@ -114,7 +114,7 @@ export default function CheckOutTable() {
     setOptions(options);
   }
 
-  console.log(data)
+  console.log(data);
 
   const handleDelete = (id) => {
     setShowMessage(true);
@@ -190,7 +190,13 @@ export default function CheckOutTable() {
                         ? "Saturday"
                         : null}
                     </td>
-                    <td>{element.hour + ":" + element.minutes}</td>
+                    <td>
+                      {element.hour +
+                        ":" +
+                        (element.minutes.toString().length == 1
+                          ? "0" + element.minutes
+                          : element.minutes)}
+                    </td>
                     <td>{element.date ? element.date.split("T")[0] : null}</td>
                     <td>{element.category}</td>
                     <td>

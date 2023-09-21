@@ -265,7 +265,13 @@ export default function FootTrafficTable() {
                         ? "Saturday"
                         : null}
                     </td>
-                    <td>{element.hour + ":" + element.minutes}</td>
+                    <td>
+                      {element.hour +
+                        ":" +
+                        (element.minutes.toString().length == 1
+                          ? "0" + element.minutes
+                          : element.minutes)}
+                    </td>
                     <td>{element.date ? element.date.split("T")[0] : null}</td>
                   </tr>
                 ))}
