@@ -14,7 +14,7 @@ app.use(express.json())
 
 //normally, the backend server prevents other applications from using the backend api. cors prevents this- npm install cors in backend folder
 app.use(cors())
-import { DateTime } from "luxon";
+
 
 //how to reach the backend server- if u do node index.js and go to localhost:8800, u will see hello this is the backend printed
 app.get("/", (req, res) => {
@@ -51,7 +51,7 @@ app.get("/checkout", (req, res) => {
 //creating new data using node- you can only test this using postman, which allows you to make api requests
 //in other words, writing the data to the database
 app.post("/foottraffic", (req, res) => {
-    const currentDate = DateTime.now().setZone("America/Los_Angeles");
+    const currentDate = new Date();
     const day = currentDate.getDay()
     const hour = currentDate.getHours();
     const minutes = currentDate.getMinutes();
