@@ -53,9 +53,10 @@ app.get("/checkout", (req, res) => {
 //in other words, writing the data to the database
 app.post("/foottraffic", (req, res) => {
     const currentDate = DateTime.now();
-    const day = currentDate.day;
+    const date = currentDate.day;
     const hour = currentDate.hour;
     const minutes = currentDate.minute;
+    const day = currentDate.weekday;
     // const day = currentDate.day
     // const hour = currentDate.hour;
     // const minutes = currentDate.getMinutes();
@@ -63,7 +64,7 @@ app.post("/foottraffic", (req, res) => {
     // const date = currentDate.getDate(); //20,21 etc
     const month = currentDate.month; //starts from 0 so add 1
     const year = currentDate.year;
-    const fullDate = `${year}-${month}-${day}`;
+    const fullDate = `${year}-${month}-${date}`;
 
     const q = "INSERT INTO foottraffic (`day`, `hour`, `date`, `minutes`) VALUES (?)";
     const values = [

@@ -249,19 +249,19 @@ export default function FootTrafficTable() {
                   <tr key={element.id}>
                     <td>{element.id}</td>
                     <td>
-                      {element.day == 0
+                      {element.day == 1
                         ? "Sunday"
-                        : element.day == 1
-                        ? "Monday"
                         : element.day == 2
-                        ? "Tuesday"
+                        ? "Monday"
                         : element.day == 3
-                        ? "Wednesday"
+                        ? "Tuesday"
                         : element.day == 4
-                        ? "Thursday"
+                        ? "Wednesday"
                         : element.day == 5
-                        ? "Friday"
+                        ? "Thursday"
                         : element.day == 6
+                        ? "Friday"
+                        : element.day == 7
                         ? "Saturday"
                         : null}
                     </td>
