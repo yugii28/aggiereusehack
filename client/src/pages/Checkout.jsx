@@ -51,6 +51,23 @@ export default function Checkout() {
     }
   };
 
+  const listOfItems = [
+    {name: "BOOK", picture: "book.png"},
+    {name: "TEXTBOOK", picture: "textbook.png"},
+    {name: "DRESS", picture: "dress.png"},
+    {name: "JACKET", picture: "jacket.png"},
+    {name: "PANTS", picture: "pants.png"},
+    {name: "SCHOOL SUPPLIES", picture: "stationery.png"},
+    {name: "SHIRTS", picture: "hawaiian-shirt.png"},
+    {name: "SHOES", picture: "shoes.png"},
+    {name: "SHORTS", picture: "denim-shorts.png"},
+    {name: "SKIRTS", picture: "skirt.png"},
+    {name: "TANK TOP", picture: "tanktop.png"},
+    {name: "ACCESSORIES", picture: "diamond-ring.png"},
+    {name: "HOME APPLIACNES", picture: "blender.png"},
+    {name: "ELECTRONICS", picture: "electronics.png"}
+  ]
+
   function ConfirmationModal() {
     return (
       <div className="modal">
@@ -122,105 +139,14 @@ export default function Checkout() {
         </div>
         <div className="category-icons">
           {showMessage && <ConfirmationModal />}
-          <button onClick={() => addCheckout("BOOK")}>
-            <div class="items">
-              <img src="book.png"></img>
-              <h1>BOOK</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckout("DRESS")}>
-            <div class="items">
-              <img src="dress.png"></img>
-              <h1>DRESS</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckout("HAT")}>
-            <div class="items">
-              <img src="hat.png"></img>
-              <h1>HAT</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckout("HOUSEHOLD SUPPLIES")}>
-            <div class="items">
-              <img src="household.png"></img>
-              <h1>HOUSEHOLD SUPPLIES</h1>
-            </div>
-            '
-          </button>
-
-          <button onClick={(event) => addCheckout("JACKET")}>
-            <div class="items">
-              <img src="jacket.png"></img>
-              <h1>JACKET</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckout("LONG-SLEEVE")}>
-            <div class="items">
-              <img src="clothes.png"></img>
-              <h1>LONG-SLEEVE</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckout("PANTS")}>
-            <div class="items">
-              <img src="pants.png"></img>
-              <h1>PANTS</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckout("RINGS")}>
-            <div class="items">
-              <img src="diamond-ring.png"></img>
-              <h1>RINGS</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckout("SCHOOL SUPPLIES")}>
-            <div class="items">
-              <img src="stationery.png"></img>
-              <h1>SCHOOL SUPPLIES</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckout("SHIRTS")}>
-            <div class="items">
-              <img src="hawaiian-shirt.png"></img>
-              <h1>SHIRTS</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckout("SHOES")}>
-            <div class="items">
-              <img src="shoes.png"></img>
-              <h1>SHOES</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckout("SHORTS")}>
-            <div class="items">
-              <img src="denim-shorts.png"></img>
-              <h1>SHORTS</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckout("SKIRTS")}>
-            <div class="items">
-              <img src="skirt.png"></img>
-              <h1>SKIRTS</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckout("SUNGLASSES")}>
-            <div class="items">
-              <img src="sunglasses.png"></img>
-              <h1>SUNGLASSES</h1>
-            </div>
-          </button>
-
+          {listOfItems.map((item) => (
+            <button onClick={() => addCheckout(item.name)}>
+              <div class="items">
+                <img src= {item.picture}></img>
+                <h1>{item.name}</h1>
+              </div>
+            </button>
+          ))}
           <button onClick={open}>
             <div class="items">
               <img src="apps.png"></img>

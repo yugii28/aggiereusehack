@@ -20,7 +20,10 @@ export default function CheckIn() {
       t: text,
     };
     try {
-      const response = await axios.post(`${process.env.REACT_APP_DEV_LINK}/checkin`, b);
+      const response = await axios.post(
+        `${process.env.REACT_APP_DEV_LINK}/checkin`,
+        b
+      );
       setShowMessage(true);
       setModalContent(`${value} added`);
       setTimeout(() => {
@@ -49,6 +52,23 @@ export default function CheckIn() {
       undo();
     }
   };
+
+  const listOfItems = [
+    {name: "BOOK", picture: "book.png"},
+    {name: "TEXTBOOK", picture: "textbook.png"},
+    {name: "DRESS", picture: "dress.png"},
+    {name: "JACKET", picture: "jacket.png"},
+    {name: "PANTS", picture: "pants.png"},
+    {name: "SCHOOL SUPPLIES", picture: "stationery.png"},
+    {name: "SHIRTS", picture: "hawaiian-shirt.png"},
+    {name: "SHOES", picture: "shoes.png"},
+    {name: "SHORTS", picture: "denim-shorts.png"},
+    {name: "SKIRTS", picture: "skirt.png"},
+    {name: "TANK TOP", picture: "tanktop.png"},
+    {name: "ACCESSORIES", picture: "diamond-ring.png"},
+    {name: "HOME APPLIACNES", picture: "blender.png"},
+    {name: "ELECTRONICS", picture: "electronics.png"}
+  ]
 
   function ConfirmationModal() {
     return (
@@ -121,104 +141,14 @@ export default function CheckIn() {
         </div>
         <div className="category-icons">
           {showMessage && <ConfirmationModal />}
-          <button onClick={() => addCheckIn("BOOK")}>
-            <div class="items">
-              <img src="book.png"></img>
-              <h1>BOOK</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckIn("DRESS")}>
-            <div class="items">
-              <img src="dress.png"></img>
-              <h1>DRESS</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckIn("HAT")}>
-            <div class="items">
-              <img src="hat.png"></img>
-              <h1>HAT</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckIn("HOUSEHOLD SUPPLIES")}>
-            <div class="items">
-              <img src="household.png"></img>
-              <h1>HOUSEHOLD SUPPLIES</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckIn("JACKET")}>
-            <div class="items">
-              <img src="jacket.png"></img>
-              <h1>JACKET</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckIn("LONG-SLEEVE")}>
-            <div class="items">
-              <img src="clothes.png"></img>
-              <h1>LONG-SLEEVE</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckIn("PANTS")}>
-            <div class="items">
-              <img src="pants.png"></img>
-              <h1>PANTS</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckIn("RINGS")}>
-            <div class="items">
-              <img src="diamond-ring.png"></img>
-              <h1>RINGS</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckIn("SCHOOL SUPPLIES")}>
-            <div class="items">
-              <img src="stationery.png"></img>
-              <h1>SCHOOL SUPPLIES</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckIn("SHIRTS")}>
-            <div class="items">
-              <img src="hawaiian-shirt.png"></img>
-              <h1>SHIRTS</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckIn("SHOES")}>
-            <div class="items">
-              <img src="shoes.png"></img>
-              <h1>SHOES</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckIn("SHORTS")}>
-            <div class="items">
-              <img src="denim-shorts.png"></img>
-              <h1>SHORTS</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckIn("SKIRTS")}>
-            <div class="items">
-              <img src="skirt.png"></img>
-              <h1>SKIRTS</h1>
-            </div>
-          </button>
-
-          <button onClick={(event) => addCheckIn("SUNGLASSES")}>
-            <div class="items">
-              <img src="sunglasses.png"></img>
-              <h1>SUNGLASSES</h1>
-            </div>
-          </button>
-
+          {listOfItems.map((item) => (
+            <button onClick={() => addCheckIn(item.name)}>
+              <div class="items">
+                <img src= {item.picture}></img>
+                <h1>{item.name}</h1>
+              </div>
+            </button>
+          ))}
           <button onClick={open}>
             <div class="items">
               <img src="apps.png"></img>
