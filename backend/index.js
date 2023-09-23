@@ -52,7 +52,7 @@ app.get("/checkout", (req, res) => {
 //creating new data using node- you can only test this using postman, which allows you to make api requests
 //in other words, writing the data to the database
 app.post("/foottraffic", (req, res) => {
-    const currentDate = DateTime.now();
+    const currentDate = DateTime.now().setZone("America/Los_Angeles");
     const date = currentDate.day;
     const hour = currentDate.hour;
     const minutes = currentDate.minute;
