@@ -21,7 +21,6 @@ export default function CheckIn() {
     };
     try {
       const response = await axios.post(`${process.env.REACT_APP_DEV_LINK}/checkin`, b);
-      console.log("no", response)
       setShowMessage(true);
       setModalContent(`${value} added`);
       setTimeout(() => {

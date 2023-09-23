@@ -53,14 +53,14 @@ app.get("/checkout", (req, res) => {
 //in other words, writing the data to the database
 app.post("/foottraffic", (req, res) => {
     const currentDate = DateTime.now();
-    const day = currentDate.getDay()
-    const hour = currentDate.getHours();
-    const minutes = currentDate.getMinutes();
+    // const day = currentDate.day
+    // const hour = currentDate.hour;
+    // const minutes = currentDate.getMinutes();
 
-    const date = currentDate.getDate(); //20,21 etc
-    const month = currentDate.getMonth() + 1; //starts from 0 so add 1
-    const year = currentDate.getFullYear();
-    const fullDate = `${year}-${month}-${date}`;
+    // const date = currentDate.getDate(); //20,21 etc
+    const month = currentDate.month; //starts from 0 so add 1
+    const year = currentDate.year;
+    const fullDate = `${year}-${month}`;
 
     const q = "INSERT INTO foottraffic (`day`, `hour`, `date`, `minutes`) VALUES (?)";
     const values = [
@@ -72,7 +72,7 @@ app.post("/foottraffic", (req, res) => {
     //you pass the query and the values, and it returns either an err or data
     connection.query(q, [values], (err, data) => {
         if (err){
-            console.log(err)
+            console.log("bruh", err)
             res.json(err)
         }
         // if the book is created successfully, sql returns that back

@@ -22,7 +22,6 @@ export default function Checkout() {
     };
     try {
       const response = await axios.post(`${process.env.REACT_APP_DEV_LINK}/checkout`, b);
-      console.log("u", response)
       setShowMessage(true);
       setModalContent(`${value} added`);
       setTimeout(() => {
