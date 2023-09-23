@@ -272,7 +272,7 @@ export default function FootTrafficTable() {
                           ? "0" + element.minutes
                           : element.minutes)}
                     </td>
-                    <td>{element.date ? element.date.split("T")[0] : null}</td>
+                    <td>{element.date}</td>
                   </tr>
                 ))}
               </table>
