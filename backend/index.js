@@ -2,9 +2,17 @@ import express from "express"
 import mysql2 from "mysql2"
 import cors from 'cors'
 import dotenv from 'dotenv';
-import {DateTime} from 'luxon'
 
 const app = express()
+
+//connecting to mysql
+// const connection = mysql2.createConnection({
+//     host: "localhost",
+//     user: "root",
+//     password: "",
+//     database: "test"
+// })
+
 dotenv.config()
 const connection = mysql2.createConnection(process.env.DATABASE_URL)
 console.log('Connected to PlanetScale!')
@@ -52,26 +60,49 @@ app.get("/checkout", (req, res) => {
 //creating new data using node- you can only test this using postman, which allows you to make api requests
 //in other words, writing the data to the database
 app.post("/foottraffic", (req, res) => {
-    const currentDate = DateTime.now().setZone("America/Los_Angeles");
-    const date = currentDate.day;
-    const hour = currentDate.hour;
-    const minutes = currentDate.minute;
-    const day = currentDate.weekday;
-    // const day = currentDate.day
-    // const hour = currentDate.hour;
-    // const minutes = currentDate.getMinutes();
+    const currentDate = new Date;
 
-    // const date = currentDate.getDate(); //20,21 etc
-    const month = currentDate.month; //starts from 0 so add 1
-    const year = currentDate.year;
-    const fullDate = `${year}-${month}-${date}`;
+    //saturday, sunday, etc
+    const day = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        weekday: 'long',
+      });
+
+    const year = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        year: 'numeric'
+    });
+
+    const month = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        month: 'long'
+    });
+
+    //20, 21, etc
+    const date = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        day: 'numeric'
+    });
+
+    const hour = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        hour: 'numeric',
+        hour12: false,
+    });
+
+    const minutes = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        minute: 'numeric'
+    });
+
+    const fullDate = `${year.format(currentDate)}-${month.format(currentDate)}-${date.format(currentDate)}`;
 
     const q = "INSERT INTO foottraffic (`day`, `hour`, `date`, `minutes`) VALUES (?)";
     const values = [
-        day,
-        hour,
+        day.format(currentDate),
+        hour.format(currentDate),
         fullDate,
-        minutes
+        minutes.format(currentDate)
     ]
     //you pass the query and the values, and it returns either an err or data
     connection.query(q, [values], (err, data) => {
@@ -120,23 +151,49 @@ app.get("/foottraffic/getallweeks", (req, res) => {
 })
 
 app.post("/checkin", (req, res) => {
-    const currentDate = new Date();
-    const day = currentDate.getDay()
-    const hour = currentDate.getHours();
-    const minutes = currentDate.getMinutes();
+    const currentDate = new Date;
 
-    const date = currentDate.getDate(); //20,21 etc
-    const month = currentDate.getMonth() + 1; //starts from 0 so add 1
-    const year = currentDate.getFullYear();
-    const fullDate = `${year}-${month}-${date}`;
-    console.log(minutes)
+    //saturday, sunday, etc
+    const day = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        weekday: 'long',
+      });
+
+    const year = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        year: 'numeric'
+    });
+
+    const month = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        month: 'long'
+    });
+
+    //20, 21, etc
+    const date = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        day: 'numeric'
+    });
+
+    const hour = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        hour: 'numeric',
+        hour12: false,
+    });
+
+    const minutes = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        minute: 'numeric'
+    });
+
+    const fullDate = `${year.format(currentDate)}-${month.format(currentDate)}-${date.format(currentDate)}`;
     const q = "INSERT INTO checkin (`day`, `hour`, `category`, `date`, `minutes`) VALUES (?)";
     const values = [
-        day,
-        hour,
+        day.format(currentDate),
+        hour.format(currentDate),
         req.body.t,
         fullDate,
-        minutes
+        minutes.format(currentDate)
     ]
     //you pass the query and the values, and it returns either an err or data
     connection.query(q, [values], (err, data) => {
@@ -150,22 +207,50 @@ app.post("/checkin", (req, res) => {
 })
 
 app.post("/checkout", (req, res) => {
-    const currentDate = new Date();
-    const day = currentDate.getDay()
-    const hour = currentDate.getHours();
-    const minutes = currentDate.getMinutes();
-    const date = currentDate.getDate(); //20,21 etc
-    const month = currentDate.getMonth() + 1; //starts from 0 so add 1
-    const year = currentDate.getFullYear();
-    const fullDate = `${year}-${month}-${date}`;
-    console.log(minutes)
+    const currentDate = new Date;
+
+    //saturday, sunday, etc
+    const day = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        weekday: 'long',
+      });
+
+    const year = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        year: 'numeric'
+    });
+
+    const month = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        month: 'long'
+    });
+
+    //20, 21, etc
+    const date = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        day: 'numeric'
+    });
+
+    const hour = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        hour: 'numeric',
+        hour12: false,
+    });
+
+    const minutes = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        minute: 'numeric'
+    });
+
+    const fullDate = `${year.format(currentDate)}-${month.format(currentDate)}-${date.format(currentDate)}`;
+
     const q = "INSERT INTO checkout (`day`, `hour`, `category`, `date`, `minutes`) VALUES (?)";
     const values = [
-        day,
-        hour,
+        day.format(currentDate),
+        hour.format(currentDate),
         req.body.t,
         fullDate,
-        minutes
+        minutes.format(currentDate)
     ]
     //you pass the query and the values, and it returns either an err or data
     connection.query(q, [values], (err, data) => {

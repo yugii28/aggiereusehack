@@ -248,30 +248,14 @@ export default function FootTrafficTable() {
                 {data.map((element) => (
                   <tr key={element.id}>
                     <td>{element.id}</td>
-                    <td>
-                      {element.day == 1
-                        ? "Sunday"
-                        : element.day == 2
-                        ? "Monday"
-                        : element.day == 3
-                        ? "Tuesday"
-                        : element.day == 4
-                        ? "Wednesday"
-                        : element.day == 5
-                        ? "Thursday"
-                        : element.day == 6
-                        ? "Friday"
-                        : element.day == 7
-                        ? "Saturday"
-                        : null}
-                    </td>
+                    <td>{element.day}</td>
                     <td>
                       {element.hour +
                         ":" +
                         (element.minutes.toString().length == 1
                           ? "0" + element.minutes
-                          : element.minutes)}
-                    </td>
+                          : element.minutes)}{" "}
+                    </td>{" "}
                     <td>{element.date}</td>
                   </tr>
                 ))}
