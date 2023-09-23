@@ -53,6 +53,10 @@ app.get("/checkout", (req, res) => {
 //in other words, writing the data to the database
 app.post("/foottraffic", (req, res) => {
     const currentDate = DateTime.now();
+    console.log("bruh")
+    const day = "21"
+    const hour = "20"
+    const minutes = "19"
     // const day = currentDate.day
     // const hour = currentDate.hour;
     // const minutes = currentDate.getMinutes();
@@ -74,6 +78,7 @@ app.post("/foottraffic", (req, res) => {
         if (err){
             console.log("bruh", err)
             res.json(err)
+            res.status(500).json({ error: "Internal server error" }); // Respond with a 500 status and an error message
         }
         // if the book is created successfully, sql returns that back
         return res.json("foot traffic has been created successfully");
