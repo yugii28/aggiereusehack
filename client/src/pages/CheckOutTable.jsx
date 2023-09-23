@@ -114,8 +114,6 @@ export default function CheckOutTable() {
     setOptions(options);
   }
 
-  console.log(data);
-
   const handleDelete = (id) => {
     setShowMessage(true);
     setTimeout(() => {

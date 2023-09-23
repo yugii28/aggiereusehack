@@ -2,6 +2,7 @@ import express from "express"
 import mysql2 from "mysql2"
 import cors from 'cors'
 import dotenv from 'dotenv';
+import {DateTime} from 'luxon'
 
 const app = express()
 dotenv.config()
@@ -51,7 +52,7 @@ app.get("/checkout", (req, res) => {
 //creating new data using node- you can only test this using postman, which allows you to make api requests
 //in other words, writing the data to the database
 app.post("/foottraffic", (req, res) => {
-    const currentDate = new Date();
+    const currentDate = DateTime.now();
     const day = currentDate.getDay()
     const hour = currentDate.getHours();
     const minutes = currentDate.getMinutes();
