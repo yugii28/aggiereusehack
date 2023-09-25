@@ -103,13 +103,12 @@ export default function Checkout() {
                 onChange={(e) => setForm(e.target.value)}
               />
               <br></br>
-              <Button
+              <button
                 type="submit"
-                variant="gradient"
-                gradient={{ from: "teal", to: "lime", deg: 105 }}
+                style =  {{backgroundColor: "lightgreen", borderRadius: "10%", cursor: "pointer"}}
               >
-                Select Category
-              </Button>
+                Add Category
+              </button>
             </form>
           </div>
         </div>

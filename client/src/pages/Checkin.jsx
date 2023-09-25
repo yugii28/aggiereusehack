@@ -13,7 +13,10 @@ export default function CheckIn() {
   const [showMessage, setShowMessage] = useState(false);
   const [modalContent, setModalContent] = useState("");
   const [showFirstModal, setShowFirstModal] = useState(false);
+  const [showSecondModal, setShowSecondModal] = useState(false);
+
   const [form, setForm] = useState();
+  const [secondForm, setSecondForm] = useState();
 
   async function addCheckIn(value) {
     console.log(value);
@@ -127,6 +130,39 @@ export default function CheckIn() {
                 onChange={(e) => setForm(e.target.value)}
               />
               <br></br>
+              <button
+                type="submit"
+                style =  {{backgroundColor: "lightgreen", borderRadius: "10%", cursor: "pointer"}}
+              >
+                Add Category
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {showSecondModal && (
+        <div class="modal-container">
+          <div class="modal-content">
+            <CloseOutline
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+                width: "20px",
+                height: "20px",
+                cursor: "pointer"
+              }}
+              onClick = {() => setShowSecondModal(false)}
+            />
+            <form onSubmit={() => addCustomCheckIn(secondForm)}>
+              <TextInput
+                placeholder="category..."
+                label="Category Name"
+                withAsterisk
+                onChange={(e) => setSecondForm(e.target.value)}
+              />
+              <br></br>
               <Button
                 type="submit"
                 variant="gradient"
@@ -138,6 +174,7 @@ export default function CheckIn() {
           </div>
         </div>
       )}
+      
 
       <div class="main-body">
         <div class="navbar-alpha">
@@ -185,6 +222,7 @@ export default function CheckIn() {
                     color: "white",
                     top: "10px",
                   }}
+                  onClick = {() => setShowSecondModal(true)}
                 />
               </button>
             </div>
