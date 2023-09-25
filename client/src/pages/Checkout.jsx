@@ -65,7 +65,7 @@ export default function Checkout() {
     {name: "SKIRTS", picture: "skirt.png"},
     {name: "TANK TOP", picture: "tanktop.png"},
     {name: "ACCESSORIES", picture: "diamond-ring.png"},
-    {name: "HOME APPLIACNES", picture: "blender.png"},
+    {name: "HOME APPLIANCES", picture: "blender.png"},
     {name: "ELECTRONICS", picture: "electronics.png"}
   ]
 

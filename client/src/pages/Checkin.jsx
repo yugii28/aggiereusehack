@@ -14,6 +14,7 @@ export default function CheckIn() {
   const [modalContent, setModalContent] = useState("");
   const [showFirstModal, setShowFirstModal] = useState(false);
   const [showSecondModal, setShowSecondModal] = useState(false);
+  const [itemName, setItemName] = useState();
 
   const [form, setForm] = useState();
   const [secondForm, setSecondForm] = useState();
@@ -29,6 +30,7 @@ export default function CheckIn() {
         `${process.env.REACT_APP_DEV_LINK}/checkin`,
         b
       );
+      console.log(response);
       setShowMessage(true);
       setModalContent(`${value} added`);
       setTimeout(() => {
@@ -38,7 +40,6 @@ export default function CheckIn() {
       console.log(err);
     }
   }
-  // console.log(form);
 
   async function addCustomCheckIn(value, number) {
     const text = value;
@@ -118,11 +119,17 @@ export default function CheckIn() {
                 right: "10px",
                 width: "20px",
                 height: "20px",
-                cursor: "pointer"
+                cursor: "pointer",
               }}
-              onClick = {() => setShowFirstModal(false)}
+              onClick={() => setShowFirstModal(false)}
             />
-            <form onSubmit={() => addCheckIn(form)}>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                addCheckIn(form);
+                setShowFirstModal(false);
+              }}
+            >
               <TextInput
                 placeholder="category..."
                 label="Category Name"
@@ -132,7 +139,11 @@ export default function CheckIn() {
               <br></br>
               <button
                 type="submit"
-                style =  {{backgroundColor: "lightgreen", borderRadius: "10%", cursor: "pointer"}}
+                style={{
+                  backgroundColor: "lightgreen",
+                  borderRadius: "10%",
+                  cursor: "pointer",
+                }}
               >
                 Add Category
               </button>
@@ -151,14 +162,14 @@ export default function CheckIn() {
                 right: "10px",
                 width: "20px",
                 height: "20px",
-                cursor: "pointer"
+                cursor: "pointer",
               }}
-              onClick = {() => setShowSecondModal(false)}
+              onClick={() => setShowSecondModal(false)}
             />
             <form onSubmit={() => addCustomCheckIn(secondForm)}>
               <TextInput
                 placeholder="category..."
-                label="Category Name"
+                label={`How many ${itemName} do you want to add?`}
                 withAsterisk
                 onChange={(e) => setSecondForm(e.target.value)}
               />
@@ -174,7 +185,6 @@ export default function CheckIn() {
           </div>
         </div>
       )}
-      
 
       <div class="main-body">
         <div class="navbar-alpha">
@@ -222,7 +232,10 @@ export default function CheckIn() {
                     color: "white",
                     top: "10px",
                   }}
-                  onClick = {() => setShowSecondModal(true)}
+                  onClick={() => {
+                    setShowSecondModal(true);
+                    setItemName(item.name);
+                  }}
                 />
               </button>
             </div>
