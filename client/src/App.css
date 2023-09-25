@@ -44,7 +44,7 @@ body {
 }
 
 .navbar-alpha1 button h1 {
-  padding: 20px 20px;
+  padding: 10px 20px;
 }
 
 .inspect-data{
@@ -137,16 +137,20 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
+  align-items: center;
   background-color: #032851;
 }
 
 .category-icons img{
   height: 100px;
   width: 100px;
+}
+
+.individual-icon {
   margin-top: 20px;
-  margin-left: 80px;
-  margin-right: 80px;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 .category-icons button {
@@ -173,7 +177,6 @@ button{
   background-color: transparent;
   border: none;
 }
-
 
 .navbar-alpha1{
   display: flex;
@@ -362,5 +365,33 @@ tr:nth-child(even) {
   .navbar-alpha1 button {
     display: none;
   }
+}
 
+.modal-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(-100%); /* Initially, place the modal above the viewport */
+  width: 50vw;
+  max-width: 80%;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  animation: slideIn 0.5s forwards; /* Use the slideIn animation */
+  border-radius: 10%;
+}
+
+/* Styles for the modal content */
+.modal-content {
+  padding: 20px; /* Optional: Add padding to the content */
+  /* Additional styling for your modal content can go here */
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translate(-50%, -50%) translateY(-100%); /* Start the animation from above the viewport */
+  }
+  100% {
+    transform: translate(-50%, -50%); /* Move the modal to the center of the viewport */
+  }
 }

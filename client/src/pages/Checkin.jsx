@@ -2,19 +2,42 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
-import { useDisclosure } from "@mantine/hooks";
-import { Modal, useMantineTheme } from "@mantine/core";
 import { TextInput } from "@mantine/core";
 import { Button } from "@mantine/core";
+import { Expand } from "@styled-icons/evaicons-solid/Expand";
+import { CloseOutline } from "@styled-icons/evaicons-outline/CloseOutline";
+import "@mantine/core/styles.css";
 
 export default function CheckIn() {
   const navigate = useNavigate();
-  const [opened, { open, close }] = useDisclosure(false);
-  const theme = useMantineTheme();
-  const [form, setForm] = useState();
   const [showMessage, setShowMessage] = useState(false);
   const [modalContent, setModalContent] = useState("");
+  const [showFirstModal, setShowFirstModal] = useState(false);
+  const [form, setForm] = useState();
+
   async function addCheckIn(value) {
+    console.log(value);
+    const text = value;
+    const b = {
+      t: text,
+    };
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_DEV_LINK}/checkin`,
+        b
+      );
+      setShowMessage(true);
+      setModalContent(`${value} added`);
+      setTimeout(() => {
+        setShowMessage(false); // Hide the "Item added!" message after 3 seconds
+      }, 1000);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  // console.log(form);
+
+  async function addCustomCheckIn(value, number) {
     const text = value;
     const b = {
       t: text,
@@ -54,21 +77,21 @@ export default function CheckIn() {
   };
 
   const listOfItems = [
-    {name: "BOOK", picture: "book.png"},
-    {name: "TEXTBOOK", picture: "textbook.png"},
-    {name: "DRESS", picture: "dress.png"},
-    {name: "JACKET", picture: "jacket.png"},
-    {name: "PANTS", picture: "pants.png"},
-    {name: "SCHOOL SUPPLIES", picture: "stationery.png"},
-    {name: "SHIRTS", picture: "hawaiian-shirt.png"},
-    {name: "SHOES", picture: "shoes.png"},
-    {name: "SHORTS", picture: "denim-shorts.png"},
-    {name: "SKIRTS", picture: "skirt.png"},
-    {name: "TANK TOP", picture: "tanktop.png"},
-    {name: "ACCESSORIES", picture: "diamond-ring.png"},
-    {name: "HOME APPLIACNES", picture: "blender.png"},
-    {name: "ELECTRONICS", picture: "electronics.png"}
-  ]
+    { name: "BOOK", picture: "book.png" },
+    { name: "TEXTBOOK", picture: "textbook.png" },
+    { name: "DRESS", picture: "dress.png" },
+    { name: "JACKET", picture: "jacket.png" },
+    { name: "PANTS", picture: "pants.png" },
+    { name: "SCHOOL SUPPLIES", picture: "stationery.png" },
+    { name: "SHIRTS", picture: "hawaiian-shirt.png" },
+    { name: "SHOES", picture: "shoes.png" },
+    { name: "SHORTS", picture: "denim-shorts.png" },
+    { name: "SKIRTS", picture: "skirt.png" },
+    { name: "TANK TOP", picture: "tanktop.png" },
+    { name: "ACCESSORIES", picture: "diamond-ring.png" },
+    { name: "HOME APPLIACNES", picture: "blender.png" },
+    { name: "ELECTRONICS", picture: "electronics.png" },
+  ];
 
   function ConfirmationModal() {
     return (
@@ -82,36 +105,40 @@ export default function CheckIn() {
 
   return (
     <div>
-      <Modal
-        opened={opened}
-        onClose={close}
-        title="Enter new category"
-        overlayProps={{
-          color:
-            theme.colorScheme === "dark"
-              ? theme.colors.dark[9]
-              : theme.colors.gray[2],
-          opacity: 0.55,
-          blur: 3,
-        }}
-      >
-        <form onSubmit={() => addCheckIn(form)}>
-          <TextInput
-            placeholder="Your name"
-            label="Category Name"
-            withAsterisk
-            onChange={(e) => setForm(e.target.value)}
-          />
-          <br></br>
-          <Button
-            type="submit"
-            variant="gradient"
-            gradient={{ from: "teal", to: "lime", deg: 105 }}
-          >
-            Add Category
-          </Button>
-        </form>
-      </Modal>
+      {showFirstModal && (
+        <div class="modal-container">
+          <div class="modal-content">
+            <CloseOutline
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+                width: "20px",
+                height: "20px",
+                cursor: "pointer"
+              }}
+              onClick = {() => setShowFirstModal(false)}
+            />
+            <form onSubmit={() => addCheckIn(form)}>
+              <TextInput
+                placeholder="category..."
+                label="Category Name"
+                withAsterisk
+                onChange={(e) => setForm(e.target.value)}
+              />
+              <br></br>
+              <Button
+                type="submit"
+                variant="gradient"
+                gradient={{ from: "teal", to: "lime", deg: 105 }}
+              >
+                Select Category
+              </Button>
+            </form>
+          </div>
+        </div>
+      )}
+
       <div class="main-body">
         <div class="navbar-alpha">
           <nav onClick={() => navigate("/")} className="navbar">
@@ -142,17 +169,31 @@ export default function CheckIn() {
         <div className="category-icons">
           {showMessage && <ConfirmationModal />}
           {listOfItems.map((item) => (
-            <button onClick={() => addCheckIn(item.name)}>
-              <div class="items">
-                <img src= {item.picture}></img>
-                <h1>{item.name}</h1>
-              </div>
-            </button>
+            <div className="individual-icon">
+              <button onClick={() => addCheckIn(item.name)}>
+                <div class="items">
+                  <img src={item.picture}></img>
+                  <h1>{item.name}</h1>
+                </div>
+              </button>
+              <button>
+                <Expand
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    cursor: "pointer",
+                    color: "white",
+                    top: "10px",
+                  }}
+                />
+              </button>
+            </div>
           ))}
-          <button onClick={open}>
+          <button onClick={() => setShowFirstModal(true)}>
+            {" "}
             <div class="items">
               <img src="apps.png"></img>
-              <h1>ADD CATEGORY</h1>
+              <h1>Add Category</h1>
             </div>
           </button>
         </div>

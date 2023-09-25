@@ -18,6 +18,8 @@ export default function FootTrafficTable() {
   const [hoursHighcharts, setHoursHighcharts] = useState();
   const [isHours, setIsHours] = useState(false);
 
+
+
   const [mainpageshow, setmainmageshow] = useState(true);
   const navigate = useNavigate();
 
@@ -44,7 +46,7 @@ export default function FootTrafficTable() {
         );
         setDays(res);
       } catch (err) {
-        // console.log(err)
+        console.log(err)
       }
     };
     getAllDays();
@@ -57,7 +59,7 @@ export default function FootTrafficTable() {
   //             setWeeks(res)
   //         }
   //         catch(err){
-  //             // console.log(err)
+  //             console.log(err)
   //         }
   //     }
   //     getAllWeeks()
@@ -71,7 +73,7 @@ export default function FootTrafficTable() {
         );
         setHours(res);
       } catch (err) {
-        // console.log(err)
+        console.log(err)
       }
     };
     getAllHours();
@@ -79,7 +81,7 @@ export default function FootTrafficTable() {
 
   function handleclick() {
     const imp_data = days.data.map((dataPoint) => ({
-      y: dataPoint["count(day)"],
+      y: dataPoint["COUNT(day)"],
       x: dataPoint["day"],
     }));
     setImpData(imp_data);
@@ -89,13 +91,16 @@ export default function FootTrafficTable() {
 
   function handleHours() {
     const imp_data = hours.data.map((dataPoint) => ({
-      y: dataPoint["count(hour)"],
+      y: dataPoint["COUNT(hour)"],
       x: dataPoint["hour"],
     }));
     setHoursHighcharts(imp_data);
     setmainmageshow((prev) => !prev);
     setIsHours((prev) => !prev);
   }
+
+  console.log(days)
+  console.log(impData)
 
   const options = {
     chart: {

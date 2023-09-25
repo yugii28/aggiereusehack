@@ -6,11 +6,12 @@ import { useDisclosure } from "@mantine/hooks";
 import { Modal, useMantineTheme } from "@mantine/core";
 import { TextInput } from "@mantine/core";
 import { Button } from "@mantine/core";
+import { Expand } from "@styled-icons/evaicons-solid/Expand";
+import { CloseOutline } from "@styled-icons/evaicons-outline/CloseOutline";
 
 export default function Checkout() {
   const navigate = useNavigate();
-  const [opened, { open, close }] = useDisclosure(false);
-  const theme = useMantineTheme();
+  const [showFirstModal, setShowFirstModal] = useState(false);
   const [form, setForm] = useState();
   const [showMessage, setShowMessage] = useState(false);
   const [modalContent, setModalContent] = useState("");
@@ -80,36 +81,40 @@ export default function Checkout() {
 
   return (
     <div>
-      <Modal
-        opened={opened}
-        onClose={close}
-        title="Search for the category"
-        overlayProps={{
-          color:
-            theme.colorScheme === "dark"
-              ? theme.colors.dark[9]
-              : theme.colors.gray[2],
-          opacity: 0.55,
-          blur: 3,
-        }}
-      >
-        <form onSubmit={() => addCheckout(form)}>
-          <TextInput
-            placeholder="category..."
-            label="Category Name"
-            withAsterisk
-            onChange={(e) => setForm(e.target.value)}
-          />
-          <br></br>
-          <Button
-            type="submit"
-            variant="gradient"
-            gradient={{ from: "teal", to: "lime", deg: 105 }}
-          >
-            Select Category
-          </Button>
-        </form>
-      </Modal>
+       {showFirstModal && (
+        <div class="modal-container">
+          <div class="modal-content">
+            <CloseOutline
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+                width: "20px",
+                height: "20px",
+                cursor: "pointer"
+              }}
+              onClick = {() => setShowFirstModal(false)}
+            />
+            <form onSubmit={() => addCheckout(form)}>
+              <TextInput
+                placeholder="category..."
+                label="Category Name"
+                withAsterisk
+                onChange={(e) => setForm(e.target.value)}
+              />
+              <br></br>
+              <Button
+                type="submit"
+                variant="gradient"
+                gradient={{ from: "teal", to: "lime", deg: 105 }}
+              >
+                Select Category
+              </Button>
+            </form>
+          </div>
+        </div>
+      )}
+
       <div class="main-body">
         <div class="navbar-alpha">
           <nav onClick={() => navigate("/")} className="navbar">
@@ -140,17 +145,30 @@ export default function Checkout() {
         <div className="category-icons">
           {showMessage && <ConfirmationModal />}
           {listOfItems.map((item) => (
-            <button onClick={() => addCheckout(item.name)}>
-              <div class="items">
-                <img src= {item.picture}></img>
-                <h1>{item.name}</h1>
-              </div>
-            </button>
+               <div className="individual-icon">
+               <button onClick={() => addCheckout(item.name)}>
+                 <div class="items">
+                   <img src={item.picture}></img>
+                   <h1>{item.name}</h1>
+                 </div>
+               </button>
+               <button>
+                 <Expand
+                   style={{
+                     width: "30px",
+                     height: "30px",
+                     cursor: "pointer",
+                     color: "white",
+                     top: "10px",
+                   }}
+                 />
+               </button>
+             </div>
           ))}
-          <button onClick={open}>
+          <button onClick={() => setShowFirstModal(true)}>
             <div class="items">
               <img src="apps.png"></img>
-              <h1>Search Category</h1>
+              <h1>Add Category</h1>
             </div>
           </button>
         </div>

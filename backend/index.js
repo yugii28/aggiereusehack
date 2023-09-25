@@ -198,7 +198,7 @@ app.post("/checkin", (req, res) => {
     //you pass the query and the values, and it returns either an err or data
     connection.query(q, [values], (err, data) => {
         if (err){
-            // console.log(err)
+            console.log(err)
             return res.json(err)
         }
         // if the book is created successfully, sql returns that back
@@ -266,13 +266,13 @@ app.post("/checkout", (req, res) => {
 
 app.delete("/deletecheckin/:id", (req, res) => {
     const itemId = req.params.id;
-    // connection.query("DELETE FROM checkin WHERE id = ?", itemId, (err, result) => {
+    connection.query("DELETE FROM checkin WHERE id = ?", itemId, (err, result) => {
         if(err){
             console.log(err)
         }else{
             res.send(result)
         }
-    // })
+    })
 })
 
 app.delete("/deletecheckout/:id", (req, res) => {
