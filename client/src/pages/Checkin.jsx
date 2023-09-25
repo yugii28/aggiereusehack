@@ -44,13 +44,15 @@ export default function CheckIn() {
   async function addCustomCheckIn(value, number) {
     const text = value;
     const b = {
-      t: text,
+      itemName: text,
+      itemNumber: number,
     };
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_DEV_LINK}/checkin`,
+        `${process.env.REACT_APP_DEV_LINK}/checkin/custom`,
         b
       );
+      console.log(response);
       setShowMessage(true);
       setModalContent(`${value} added`);
       setTimeout(() => {
@@ -166,7 +168,13 @@ export default function CheckIn() {
               }}
               onClick={() => setShowSecondModal(false)}
             />
-            <form onSubmit={() => addCustomCheckIn(itemName, secondForm)}>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                addCustomCheckIn(itemName, secondForm);
+                setShowSecondModal(false);
+              }}
+            >
               <TextInput
                 placeholder="category..."
                 label={`How many ${itemName} do you want to add?`}

@@ -15,6 +15,9 @@ export default function Checkout() {
   const [form, setForm] = useState();
   const [showMessage, setShowMessage] = useState(false);
   const [modalContent, setModalContent] = useState("");
+  const [showSecondModal, setShowSecondModal] = useState(false);
+  const [itemName, setItemName] = useState();
+  const [secondForm, setSecondForm] = useState();
 
   async function addCheckout(value) {
     const text = value;
@@ -24,6 +27,28 @@ export default function Checkout() {
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_DEV_LINK}/checkout`,
+        b
+      );
+      console.log(response);
+      setShowMessage(true);
+      setModalContent(`${value} added`);
+      setTimeout(() => {
+        setShowMessage(false); // Hide the "Item added!" message after 3 seconds
+      }, 1000);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function addCustomCheckout(value, number) {
+    const text = value;
+    const b = {
+      itemName: text,
+      itemNumber: number,
+    };
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_DEV_LINK}/checkout/custom`,
         b
       );
       console.log(response);
@@ -128,6 +153,46 @@ export default function Checkout() {
         </div>
       )}
 
+      {showSecondModal && (
+        <div class="modal-container">
+          <div class="modal-content">
+            <CloseOutline
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+                width: "20px",
+                height: "20px",
+                cursor: "pointer",
+              }}
+              onClick={() => setShowSecondModal(false)}
+            />
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                addCustomCheckout(itemName, secondForm);
+                setShowSecondModal(false);
+              }}
+            >
+              <TextInput
+                placeholder="category..."
+                label={`How many ${itemName} do you want to add?`}
+                withAsterisk
+                onChange={(e) => setSecondForm(e.target.value)}
+              />
+              <br></br>
+              <Button
+                type="submit"
+                variant="gradient"
+                gradient={{ from: "teal", to: "lime", deg: 105 }}
+              >
+                Select Category
+              </Button>
+            </form>
+          </div>
+        </div>
+      )}
+
       <div class="main-body">
         <div class="navbar-alpha">
           <nav onClick={() => navigate("/")} className="navbar">
@@ -173,6 +238,10 @@ export default function Checkout() {
                     cursor: "pointer",
                     color: "white",
                     top: "10px",
+                  }}
+                  onClick={() => {
+                    setShowSecondModal(true);
+                    setItemName(item.name);
                   }}
                 />
               </button>

@@ -206,6 +206,128 @@ app.post("/checkin", (req, res) => {
     })
 })
 
+app.post("/checkin/custom", (req, res) => {
+    const currentDate = new Date;
+    console.log(req.body)
+    const numberOfTimes = req.body.itemNumber;
+    console.log(numberOfTimes);
+    console.log(req.body.itemName)
+    //saturday, sunday, etc
+    const day = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        weekday: 'long',
+      });
+
+    const year = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        year: 'numeric'
+    });
+
+    const month = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        month: 'long'
+    });
+
+    //20, 21, etc
+    const date = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        day: 'numeric'
+    });
+
+    const hour = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        hour: 'numeric',
+        hour12: false,
+    });
+
+    const minutes = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        minute: 'numeric'
+    });
+
+    const fullDate = `${year.format(currentDate)}-${month.format(currentDate)}-${date.format(currentDate)}`;
+    const q = "INSERT INTO checkin (`day`, `hour`, `category`, `date`, `minutes`) VALUES (?)";
+    const values = [
+        day.format(currentDate),
+        hour.format(currentDate),
+        req.body.itemName,
+        fullDate,
+        minutes.format(currentDate)
+    ]
+    //you pass the query and the values, and it returns either an err or data
+    for (let i = 0; i < numberOfTimes; i++) {
+        connection.query(q, [values], (err, data) => {
+            if (err){
+                console.log(err)
+                // return res.json(err)
+            }
+            // if the book is created successfully, sql returns that back
+            // return res.json("specific check ins has been created successfully");
+        })
+    }
+})
+
+app.post("/checkout/custom", (req, res) => {
+    const currentDate = new Date;
+    console.log(req.body)
+    const numberOfTimes = req.body.itemNumber;
+    console.log(numberOfTimes);
+    console.log(req.body.itemName)
+    //saturday, sunday, etc
+    const day = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        weekday: 'long',
+      });
+
+    const year = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        year: 'numeric'
+    });
+
+    const month = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        month: 'long'
+    });
+
+    //20, 21, etc
+    const date = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        day: 'numeric'
+    });
+
+    const hour = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        hour: 'numeric',
+        hour12: false,
+    });
+
+    const minutes = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        minute: 'numeric'
+    });
+
+    const fullDate = `${year.format(currentDate)}-${month.format(currentDate)}-${date.format(currentDate)}`;
+    const q = "INSERT INTO checkout (`day`, `hour`, `category`, `date`, `minutes`) VALUES (?)";
+    const values = [
+        day.format(currentDate),
+        hour.format(currentDate),
+        req.body.itemName,
+        fullDate,
+        minutes.format(currentDate)
+    ]
+    //you pass the query and the values, and it returns either an err or data
+    for (let i = 0; i < numberOfTimes; i++) {
+        connection.query(q, [values], (err, data) => {
+            if (err){
+                console.log(err)
+                // return res.json(err)
+            }
+            // if the book is created successfully, sql returns that back
+            // return res.json("specific check ins has been created successfully");
+        })
+    }
+})
+
 app.post("/checkout", (req, res) => {
     const currentDate = new Date;
 
