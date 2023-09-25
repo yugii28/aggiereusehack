@@ -93,7 +93,7 @@ export default function CheckIn() {
     { name: "SKIRTS", picture: "skirt.png" },
     { name: "TANK TOP", picture: "tanktop.png" },
     { name: "ACCESSORIES", picture: "diamond-ring.png" },
-    { name: "HOME APPLIACNES", picture: "blender.png" },
+    { name: "HOME APPLIANCES", picture: "blender.png" },
     { name: "ELECTRONICS", picture: "electronics.png" },
   ];
 
@@ -166,7 +166,7 @@ export default function CheckIn() {
               }}
               onClick={() => setShowSecondModal(false)}
             />
-            <form onSubmit={() => addCustomCheckIn(secondForm)}>
+            <form onSubmit={() => addCustomCheckIn(itemName, secondForm)}>
               <TextInput
                 placeholder="category..."
                 label={`How many ${itemName} do you want to add?`}

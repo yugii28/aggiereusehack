@@ -22,7 +22,11 @@ export default function Checkout() {
       t: text,
     };
     try {
-      const response = await axios.post(`${process.env.REACT_APP_DEV_LINK}/checkout`, b);
+      const response = await axios.post(
+        `${process.env.REACT_APP_DEV_LINK}/checkout`,
+        b
+      );
+      console.log(response);
       setShowMessage(true);
       setModalContent(`${value} added`);
       setTimeout(() => {
@@ -53,21 +57,21 @@ export default function Checkout() {
   };
 
   const listOfItems = [
-    {name: "BOOK", picture: "book.png"},
-    {name: "TEXTBOOK", picture: "textbook.png"},
-    {name: "DRESS", picture: "dress.png"},
-    {name: "JACKET", picture: "jacket.png"},
-    {name: "PANTS", picture: "pants.png"},
-    {name: "SCHOOL SUPPLIES", picture: "stationery.png"},
-    {name: "SHIRTS", picture: "hawaiian-shirt.png"},
-    {name: "SHOES", picture: "shoes.png"},
-    {name: "SHORTS", picture: "denim-shorts.png"},
-    {name: "SKIRTS", picture: "skirt.png"},
-    {name: "TANK TOP", picture: "tanktop.png"},
-    {name: "ACCESSORIES", picture: "diamond-ring.png"},
-    {name: "HOME APPLIANCES", picture: "blender.png"},
-    {name: "ELECTRONICS", picture: "electronics.png"}
-  ]
+    { name: "BOOK", picture: "book.png" },
+    { name: "TEXTBOOK", picture: "textbook.png" },
+    { name: "DRESS", picture: "dress.png" },
+    { name: "JACKET", picture: "jacket.png" },
+    { name: "PANTS", picture: "pants.png" },
+    { name: "SCHOOL SUPPLIES", picture: "stationery.png" },
+    { name: "SHIRTS", picture: "hawaiian-shirt.png" },
+    { name: "SHOES", picture: "shoes.png" },
+    { name: "SHORTS", picture: "denim-shorts.png" },
+    { name: "SKIRTS", picture: "skirt.png" },
+    { name: "TANK TOP", picture: "tanktop.png" },
+    { name: "ACCESSORIES", picture: "diamond-ring.png" },
+    { name: "HOME APPLIANCES", picture: "blender.png" },
+    { name: "ELECTRONICS", picture: "electronics.png" },
+  ];
 
   function ConfirmationModal() {
     return (
@@ -81,7 +85,7 @@ export default function Checkout() {
 
   return (
     <div>
-       {showFirstModal && (
+      {showFirstModal && (
         <div class="modal-container">
           <div class="modal-content">
             <CloseOutline
@@ -91,11 +95,17 @@ export default function Checkout() {
                 right: "10px",
                 width: "20px",
                 height: "20px",
-                cursor: "pointer"
+                cursor: "pointer",
               }}
-              onClick = {() => setShowFirstModal(false)}
+              onClick={() => setShowFirstModal(false)}
             />
-            <form onSubmit={() => addCheckout(form)}>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                addCheckout(form);
+                setShowFirstModal(false);
+              }}
+            >
               <TextInput
                 placeholder="category..."
                 label="Category Name"
@@ -105,7 +115,11 @@ export default function Checkout() {
               <br></br>
               <button
                 type="submit"
-                style =  {{backgroundColor: "lightgreen", borderRadius: "10%", cursor: "pointer"}}
+                style={{
+                  backgroundColor: "lightgreen",
+                  borderRadius: "10%",
+                  cursor: "pointer",
+                }}
               >
                 Add Category
               </button>
@@ -144,25 +158,25 @@ export default function Checkout() {
         <div className="category-icons">
           {showMessage && <ConfirmationModal />}
           {listOfItems.map((item) => (
-               <div className="individual-icon">
-               <button onClick={() => addCheckout(item.name)}>
-                 <div class="items">
-                   <img src={item.picture}></img>
-                   <h1>{item.name}</h1>
-                 </div>
-               </button>
-               <button>
-                 <Expand
-                   style={{
-                     width: "30px",
-                     height: "30px",
-                     cursor: "pointer",
-                     color: "white",
-                     top: "10px",
-                   }}
-                 />
-               </button>
-             </div>
+            <div className="individual-icon">
+              <button onClick={() => addCheckout(item.name)}>
+                <div class="items">
+                  <img src={item.picture}></img>
+                  <h1>{item.name}</h1>
+                </div>
+              </button>
+              <button>
+                <Expand
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    cursor: "pointer",
+                    color: "white",
+                    top: "10px",
+                  }}
+                />
+              </button>
+            </div>
           ))}
           <button onClick={() => setShowFirstModal(true)}>
             <div class="items">
