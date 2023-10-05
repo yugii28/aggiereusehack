@@ -18,6 +18,7 @@ export default function FootTrafficTable() {
   const [hoursHighcharts, setHoursHighcharts] = useState();
   const [isHours, setIsHours] = useState(false);
 
+  const [showMessage, setShowMessage] = useState(false);
 
 
   const [mainpageshow, setmainmageshow] = useState(true);
@@ -99,8 +100,30 @@ export default function FootTrafficTable() {
     setIsHours((prev) => !prev);
   }
 
-  console.log(days)
-  console.log(impData)
+  const deleteItem = (id) => {
+    axios
+      .delete(`${process.env.REACT_APP_DEV_LINK}/deletefoottraffic/${id}`)
+      .then((response) => {
+        setData(
+          data.filter((val) => {
+            return val.id != id;
+          })
+        );
+      });
+  };
+
+  const handleDelete = (id) => {
+    setShowMessage(true);
+    setTimeout(() => {
+      setShowMessage(false); // Hide the "Item added!" message after 3 seconds
+    }, 3000);
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this item? Note that once deleted, the item can never be recovered."
+    );
+    if (confirmed) {
+      deleteItem(id);
+    }
+  };
 
   const options = {
     chart: {
@@ -249,6 +272,7 @@ export default function FootTrafficTable() {
                   <th>Day</th>
                   <th>Time</th>
                   <th>Date</th>
+                  <th>Delete</th>
                 </tr>
                 {data.map((element) => (
                   <tr key={element.id}>
@@ -262,6 +286,16 @@ export default function FootTrafficTable() {
                           : element.minutes)}{" "}
                     </td>{" "}
                     <td>{element.date}</td>
+                    <td>
+                      <button
+                        className="delete-button"
+                        onClick={() => {
+                          handleDelete(element.id);
+                        }}
+                      >
+                        Delete Item
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </table>

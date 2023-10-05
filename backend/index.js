@@ -408,6 +408,17 @@ app.delete("/deletecheckout/:id", (req, res) => {
     })
 })
 
+app.delete("/deletefoottraffic/:id", (req, res) => {
+    const itemId = req.params.id;
+    connection.query("DELETE FROM foottraffic WHERE id = ?", itemId, (err, result) => {
+        if(err){
+            console.log(err)
+        }else{
+            res.send(result)
+        }
+    })
+})
+
 //delete the last record from the checkin table aka the last item that was added
 app.delete("/undo/checkin", (req, res) => {
     connection.query("DELETE FROM checkin ORDER BY id DESC LIMIT 1", (err, result) => {
