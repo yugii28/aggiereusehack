@@ -170,9 +170,9 @@ export default function CheckOutTable() {
                   <th>Category</th>
                   <th>Delete</th>
                 </tr>
-                {data.map((element) => (
+                {data.map((element, index) => (
                   <tr key={element.id}>
-                    <td>{element.id}</td>
+                    <td>{index + 1}</td>
                     <td>{element.day}</td>
                     <td>
                       {element.hour +

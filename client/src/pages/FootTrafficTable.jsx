@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Table } from "@mantine/core";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { Link, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export default function FootTrafficTable() {
@@ -274,9 +272,9 @@ export default function FootTrafficTable() {
                   <th>Date</th>
                   <th>Delete</th>
                 </tr>
-                {data.map((element) => (
+                {data.map((element, index) => (
                   <tr key={element.id}>
-                    <td>{element.id}</td>
+                    <td>{index + 1}</td>
                     <td>{element.day}</td>
                     <td>
                       {element.hour +
@@ -349,7 +347,7 @@ export default function FootTrafficTable() {
                   className="previous"
                   onClick={() => setmainmageshow(true)}
                 >
-                  <img src="/previous1.svg" height="50px"></img>
+                  <img src="/previous1.svg" height="50px" alt = "go-back-button"></img>
                 </button>
               </div>
             </div>
@@ -367,6 +365,7 @@ export default function FootTrafficTable() {
                   src="/logo.png"
                   size="130"
                   width="130"
+                  alt = "aggie-reuse-store-logo"
                 ></img>
                 <div className="column1">
                   <h1 className="heavy">Aggie Reuse Store</h1>
@@ -393,7 +392,7 @@ export default function FootTrafficTable() {
                   className="previous"
                   onClick={() => setmainmageshow((prev) => !prev)}
                 >
-                  <img src="/previous1.svg" height="50px"></img>
+                  <img src="/previous1.svg" height="50px" alt = "go-back-button"></img>
                 </button>
               </div>
             </div>
