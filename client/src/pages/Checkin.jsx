@@ -94,6 +94,10 @@ export default function CheckIn() {
     { name: "ACCESSORIES", picture: "diamond-ring.png" },
     { name: "HOME APPLIANCES", picture: "blender.png" },
     { name: "ELECTRONICS", picture: "electronics.png" },
+    { name: "HATS", picture: "hat.png" },
+    { name: "LONG SLEEVE", picture: "clothes.png" },
+    { name: "WATER BOTTLE", picture: "water.png" },
+    { name: "MISCELLANEOUS", picture: "miscellaneous.png" },
   ];
 
   function ConfirmationModal() {
@@ -184,7 +188,7 @@ export default function CheckIn() {
                 variant="gradient"
                 gradient={{ from: "teal", to: "lime", deg: 105 }}
               >
-                Select Category
+                Add items
               </Button>
             </form>
           </div>

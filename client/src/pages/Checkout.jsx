@@ -95,6 +95,10 @@ export default function Checkout() {
     { name: "ACCESSORIES", picture: "diamond-ring.png" },
     { name: "HOME APPLIANCES", picture: "blender.png" },
     { name: "ELECTRONICS", picture: "electronics.png" },
+    { name: "HATS", picture: "hat.png" },
+    { name: "LONG SLEEVE", picture: "clothes.png" },
+    { name: "WATER BOTTLE", picture: "water.png" },
+    { name: "MISCELLANEOUS", picture: "miscellaneous.png" },
   ];
 
   function ConfirmationModal() {
@@ -185,7 +189,7 @@ export default function Checkout() {
                 variant="gradient"
                 gradient={{ from: "teal", to: "lime", deg: 105 }}
               >
-                Select Category
+                Add items
               </Button>
             </form>
           </div>
@@ -214,7 +218,7 @@ export default function Checkout() {
         </div>
         <br></br>
         <div className="text-at-top">
-          <h1 className="add-header">DONATE ITEM</h1>
+          <h1 className="add-header">CHECKOUT ITEM</h1>
           <button className="delete-button-undo" onClick={() => handleUndo()}>
             Undo
           </button>
