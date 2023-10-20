@@ -71,7 +71,7 @@ const Books = () => {
                 <img
                   onClick={() => navigate("/checkout")}
                   className="curve-img"
-                  src="checkout.avif"
+                  src="checkout.png"
                   width="350"
                 ></img>
               </Link>
