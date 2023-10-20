@@ -20,7 +20,6 @@ export default function CheckIn() {
   const [secondForm, setSecondForm] = useState();
 
   async function addCheckIn(value) {
-    console.log(value);
     const text = value;
     const b = {
       t: text,
@@ -30,7 +29,6 @@ export default function CheckIn() {
         `${process.env.REACT_APP_DEV_LINK}/checkin`,
         b
       );
-      console.log(response);
       setShowMessage(true);
       setModalContent(`${value} added`);
       setTimeout(() => {
@@ -52,7 +50,6 @@ export default function CheckIn() {
         `${process.env.REACT_APP_DEV_LINK}/checkin/custom`,
         b
       );
-      console.log(response);
       setShowMessage(true);
       setModalContent(`${value} added`);
       setTimeout(() => {

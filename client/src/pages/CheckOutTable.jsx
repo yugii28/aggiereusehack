@@ -31,7 +31,6 @@ export default function CheckOutTable() {
     fetchAllCheckOut();
   }, []);
 
-  console.log(data);
 
   useEffect(() => {
     const getAllCats = async () => {
@@ -59,12 +58,12 @@ export default function CheckOutTable() {
       });
   };
 
+ 
   function getCategory() {
     const imp_data = cat.data.map((dataPoint) => ({
       y: dataPoint["count(category)"],
       x: dataPoint["category"],
     }));
-    console.log(imp_data);
     setmainmageshow((prev) => !prev);
     setIsCats((prev) => !prev);
 

@@ -107,7 +107,6 @@ app.post("/foottraffic", (req, res) => {
     //you pass the query and the values, and it returns either an err or data
     connection.query(q, [values], (err, data) => {
         if (err){
-            console.log("bruh", err)
             res.json(err)
             res.status(500).json({ error: "Internal server error" }); // Respond with a 500 status and an error message
         }
@@ -269,10 +268,7 @@ app.post("/checkin/custom", (req, res) => {
 
 app.post("/checkout/custom", (req, res) => {
     const currentDate = new Date;
-    console.log(req.body)
     const numberOfTimes = req.body.itemNumber;
-    console.log(numberOfTimes);
-    console.log(req.body.itemName)
     //saturday, sunday, etc
     const day = new Intl.DateTimeFormat('en-US', {
         timeZone: 'America/Los_Angeles',
@@ -441,21 +437,20 @@ app.delete("/undo/checkout", (req, res) => {
     })
 })
 
-app.put("/books/:id", (req, res) => {
-    const bookId = req.params.id;
-    console.log(bookId);
-    const q = "UPDATE books SET `title` = ?, `desc` = ?, `price` = ?, WHERE id = ?";
-    const values = [
-        req.body.title,
-        req.body.desc,
-        req.body.price, 
-    ]
-    connection.query(q, [...values, bookId], (err, data) => {
-        if (err) return res.json(err)
-        // if the book is created successfully, sql returns that back
-        return res.json("Book has been updated successfully");
-    })
-})
+// app.put("/books/:id", (req, res) => {
+//     const bookId = req.params.id;
+//     const q = "UPDATE books SET `title` = ?, `desc` = ?, `price` = ?, WHERE id = ?";
+//     const values = [
+//         req.body.title,
+//         req.body.desc,
+//         req.body.price, 
+//     ]
+//     connection.query(q, [...values, bookId], (err, data) => {
+//         if (err) return res.json(err)
+//         // if the book is created successfully, sql returns that back
+//         return res.json("Book has been updated successfully");
+//     })
+// })
 
 //idk
 app.listen(8800, ()=> {

@@ -29,7 +29,6 @@ export default function Checkout() {
         `${process.env.REACT_APP_DEV_LINK}/checkout`,
         b
       );
-      console.log(response);
       setShowMessage(true);
       setModalContent(`${value} added`);
       setTimeout(() => {

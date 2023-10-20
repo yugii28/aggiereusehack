@@ -9,14 +9,14 @@ export default function FootTrafficTable() {
   const [loading, setLoading] = useState(true);
 
   const [days, setDays] = useState();
-  const [impData, setImpData] = useState();
   const [isDays, setIsDays] = useState();
 
   const [hours, setHours] = useState();
-  const [hoursHighcharts, setHoursHighcharts] = useState();
   const [isHours, setIsHours] = useState(false);
 
   const [showMessage, setShowMessage] = useState(false);
+  const [dayOptions, setDayOptions] = useState();
+  const [hourOptions, setHourOptions] = useState();
 
 
   const [mainpageshow, setmainmageshow] = useState(true);
@@ -31,7 +31,7 @@ export default function FootTrafficTable() {
         setData(res.data);
         setLoading(false);
       } catch (err) {
-        // console.log(err)
+        console.log(err)
       }
     };
     fetchAllBooks();
@@ -51,19 +51,6 @@ export default function FootTrafficTable() {
     getAllDays();
   }, []);
 
-  // useEffect(() => {
-  //     const getAllWeeks = async() => {
-  //         try {
-  //             const res = await axios.get("http://localhost:8800/foottraffic/getallweeks")
-  //             setWeeks(res)
-  //         }
-  //         catch(err){
-  //             console.log(err)
-  //         }
-  //     }
-  //     getAllWeeks()
-  // }, [])
-
   useEffect(() => {
     const getAllHours = async () => {
       try {
@@ -80,22 +67,123 @@ export default function FootTrafficTable() {
 
   function handleclick() {
     const imp_data = days.data.map((dataPoint) => ({
-      y: dataPoint["COUNT(day)"],
+      y: dataPoint["count(`day`)"],
       x: dataPoint["day"],
     }));
-    setImpData(imp_data);
+    // setImpData(imp_data);
     setmainmageshow((prev) => !prev);
     setIsDays((prev) => !prev);
+    const options = {
+      chart: {
+        type: "column",
+        borderWidth: 0,
+        backgroundColor: "transparent",
+      },
+      tooltip: {
+        formatter: function () {
+          return (
+            "There have been <b>" +
+            this.y +
+            "</b>  people on <b>" +
+            this.x +
+            "s</b>"
+          );
+        },
+      },
+      legend: {
+        enabled: false,
+      },
+      title: {
+        text: undefined,
+      },
+      yAxis: {
+        gridLineWidth: 0,
+        title: {
+          text: "Number of students",
+        },
+      },
+      xAxis: {
+        categories: imp_data.map((item) => item.x),
+        labels: {
+          enabled: true,
+        },
+        title: {
+          text: "Day of the week",
+        },
+        lineWidth: 2,
+        lineColor: "black",
+      },
+      credits: {
+        enabled: false,
+      },
+      series: [
+        {
+          colorByPoint: true,
+          data: imp_data.map((item) => item.y),
+        },
+      ],
+    };
+    setDayOptions(options);
   }
 
   function handleHours() {
     const imp_data = hours.data.map((dataPoint) => ({
-      y: dataPoint["COUNT(hour)"],
+      y: dataPoint["count(`hour`)"],
       x: dataPoint["hour"],
     }));
-    setHoursHighcharts(imp_data);
     setmainmageshow((prev) => !prev);
     setIsHours((prev) => !prev);
+    const options = {
+      chart: {
+        type: "column",
+        borderWidth: 0,
+        backgroundColor: "transparent",
+      },
+      tooltip: {
+        formatter: function () {
+          return (
+            "There have been <b>" +
+            this.y +
+            "</b>  people at <b>" +
+            this.x +
+            "</b>oclock"
+          );
+        },
+      },
+      legend: {
+        enabled: false,
+      },
+      title: {
+        text: undefined,
+      },
+      yAxis: {
+        gridLineWidth: 0,
+        title: {
+          text: "Number of students",
+        },
+      },
+      xAxis: {
+        categories: imp_data.map((item) => item.x),
+        labels: {
+          enabled: true,
+        },
+        lineWidth: 2,
+        lineColor: "black",
+        title: {
+          text: "Hour of the day",
+        },
+      },
+      credits: {
+        enabled: false,
+      },
+      series: [
+        {
+          colorByPoint: true,
+          data: imp_data.map((item) => item.y),
+        },
+      ],
+    };
+    setHourOptions(options)
   }
 
   const deleteItem = (id) => {
@@ -123,114 +211,7 @@ export default function FootTrafficTable() {
     }
   };
 
-  const options = {
-    chart: {
-      type: "column",
-      borderWidth: 0,
-      backgroundColor: "transparent",
-    },
-    tooltip: {
-      formatter: function () {
-        return (
-          "There have been <b>" +
-          this.y +
-          "</b>  people on <b>" +
-          this.x +
-          "s</b>"
-        );
-      },
-    },
-    legend: {
-      enabled: false,
-    },
-    title: {
-      text: undefined,
-    },
-    yAxis: {
-      gridLineWidth: 0,
-      title: {
-        text: "Number of students",
-      },
-    },
-    xAxis: {
-      categories: [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ],
-      labels: {
-        enabled: true,
-      },
-      title: {
-        text: "Day of the week",
-      },
-      lineWidth: 2,
-      lineColor: "black",
-    },
-    credits: {
-      enabled: false,
-    },
-    series: [
-      {
-        colorByPoint: true,
-        data: impData,
-      },
-    ],
-  };
 
-  const hoursOptions = {
-    chart: {
-      type: "column",
-      borderWidth: 0,
-      backgroundColor: "transparent",
-    },
-    tooltip: {
-      formatter: function () {
-        return (
-          "There have been <b>" +
-          this.y +
-          "</b>  people at <b>" +
-          this.x +
-          "</b>oclock"
-        );
-      },
-    },
-    legend: {
-      enabled: false,
-    },
-    title: {
-      text: undefined,
-    },
-    yAxis: {
-      gridLineWidth: 0,
-      title: {
-        text: "Number of students",
-      },
-    },
-    xAxis: {
-      labels: {
-        enabled: true,
-      },
-      lineWidth: 2,
-      lineColor: "black",
-      title: {
-        text: "Hour of the day",
-      },
-    },
-    credits: {
-      enabled: false,
-    },
-    series: [
-      {
-        colorByPoint: true,
-        data: hoursHighcharts,
-      },
-    ],
-  };
 
   if (!loading && Array.isArray(data)) {
     if (mainpageshow) {
@@ -341,7 +322,7 @@ export default function FootTrafficTable() {
               <h1 className="bar-header" align="center">
                 NUMBER OF STUDENTS PER DAY OF THE WEEK
               </h1>
-              <HighchartsReact highcharts={Highcharts} options={options} />
+              <HighchartsReact highcharts={Highcharts} options={dayOptions} />
               <div align="right">
                 <button
                   className="previous"
@@ -386,7 +367,7 @@ export default function FootTrafficTable() {
               <h1 className="bar-header" align="center">
                 NUMBER OF STUDENTS PER HOUR OF THE DAY
               </h1>
-              <HighchartsReact highcharts={Highcharts} options={hoursOptions} />
+              <HighchartsReact highcharts={Highcharts} options={hourOptions} />
               <div align="right">
                 <button
                   className="previous"
