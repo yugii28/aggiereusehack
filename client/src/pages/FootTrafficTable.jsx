@@ -231,15 +231,6 @@ export default function FootTrafficTable() {
                   <h1 className="asucd">ASUCD</h1>
                 </div>
               </nav>
-              <button>
-                <h1
-                  class="inspect-data1"
-                  onClick={() => navigate("/foot-traffic-table")}
-                >
-                  {" "}
-                  INSPECT <br></br>FOOT <br></br>TRAFFIC
-                </h1>
-              </button>
             </div>
             <h1 className="bar-header" align="center">
               DATABASE FOR FOOT TRAFFIC
