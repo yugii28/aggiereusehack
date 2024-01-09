@@ -115,6 +115,7 @@ app.post("/foottraffic", (req, res) => {
     })
 })
 
+
 app.get("/foottraffic/getalldays", (req, res) => {
     const q = "SELECT COUNT(day),day FROM foottraffic GROUP BY day"
     connection.query(q, (err, data) => {
