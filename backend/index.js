@@ -6,17 +6,17 @@ import dotenv from 'dotenv';
 const app = express()
 
 //connecting to mysql
-// const connection = mysql2.createConnection({
-//     host: "localhost",
-//     user: "root",
-//     password: "",
-//     database: "test"
-// })
+const connection = mysql2.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "test"
+})
 
-dotenv.config()
-const connection = mysql2.createConnection(process.env.DATABASE_URL)
-console.log('Connected to PlanetScale!')
-connection.connect()
+// dotenv.config()
+// const connection = mysql2.createConnection(process.env.DATABASE_URL)
+// console.log('Connected to PlanetScale!')
+// connection.connect()
 
 //allows you to send any json file using a client
 app.use(express.json())

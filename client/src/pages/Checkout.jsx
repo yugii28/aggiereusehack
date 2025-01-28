@@ -26,7 +26,7 @@ export default function Checkout() {
     };
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_DEV_LINK}/checkout`,
+        `http://localhost:8800/checkout`,
         b
       );
       setShowMessage(true);
@@ -47,7 +47,7 @@ export default function Checkout() {
     };
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_DEV_LINK}/checkout/custom`,
+        `http://localhost:8800/checkout/custom`,
         b
       );
       console.log(response);
@@ -62,7 +62,7 @@ export default function Checkout() {
   }
 
   const undo = () => {
-    axios.delete(`${process.env.REACT_APP_DEV_LINK}/undo/checkout/`);
+    axios.delete(`http://localhost:8800/undo/checkout/`);
   };
 
   const handleUndo = () => {

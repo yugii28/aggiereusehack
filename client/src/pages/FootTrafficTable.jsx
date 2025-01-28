@@ -26,7 +26,7 @@ export default function FootTrafficTable() {
     const fetchAllBooks = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_DEV_LINK}/foottraffic`
+          `http://localhost:8800/foottraffic`
         );
         setData(res.data);
         setLoading(false);
@@ -41,7 +41,7 @@ export default function FootTrafficTable() {
     const getAllDays = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_DEV_LINK}/foottraffic/getalldays`
+          `http://localhost:8800/foottraffic/getalldays`
         );
         setDays(res);
       } catch (err) {
@@ -55,7 +55,7 @@ export default function FootTrafficTable() {
     const getAllHours = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_DEV_LINK}/foottraffic/getallhours`
+          `http://localhost:8800/foottraffic/getallhours`
         );
         setHours(res);
       } catch (err) {
@@ -65,11 +65,17 @@ export default function FootTrafficTable() {
     getAllHours();
   }, []);
 
+
   function handleclick() {
-    const imp_data = days.data.map((dataPoint) => ({
-      y: dataPoint["count(`day`)"],
+    const imp_data = days.data.map((dataPoint) => 
+      (
+      {
+      // console.log(dataPoint["COUNT(day)"]),
+      y: dataPoint["COUNT(day)"],
       x: dataPoint["day"],
-    }));
+    }
+  )
+);
     // setImpData(imp_data);
     setmainmageshow((prev) => !prev);
     setIsDays((prev) => !prev);
@@ -188,7 +194,7 @@ export default function FootTrafficTable() {
 
   const deleteItem = (id) => {
     axios
-      .delete(`${process.env.REACT_APP_DEV_LINK}/deletefoottraffic/${id}`)
+      .delete(`http://localhost:8800/deletefoottraffic/${id}`)
       .then((response) => {
         setData(
           data.filter((val) => {

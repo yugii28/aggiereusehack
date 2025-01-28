@@ -20,7 +20,7 @@ export default function CheckInTable() {
     const fetchAllCheckIn = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_DEV_LINK}/checkin`
+          `http://localhost:8800/checkin`
         );
         setData(res.data);
         setLoading(false);
@@ -35,7 +35,7 @@ export default function CheckInTable() {
     const getAllCats = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_DEV_LINK}/checkin/getallcategories`
+          `http://localhost:8800/checkin/getallcategories`
         );
         setCat(res);
       } catch (err) {
@@ -47,7 +47,7 @@ export default function CheckInTable() {
 
   const deleteItem = (id) => {
     axios
-      .delete(`${process.env.REACT_APP_DEV_LINK}/deletecheckin/${id}`)
+      .delete(`http://localhost:8800/deletecheckin/${id}`)
       .then((response) => {
         setData(
           data.filter((val) => {
@@ -59,7 +59,7 @@ export default function CheckInTable() {
 
   function getCategory() {
     const imp_data = cat.data.map((dataPoint) => ({
-      y: dataPoint["count(category)"],
+      y: dataPoint["COUNT(category)"],
       x: dataPoint["category"],
     }));
     setmainPageShow((prev) => !prev);

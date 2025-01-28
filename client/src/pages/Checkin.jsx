@@ -26,7 +26,7 @@ export default function CheckIn() {
     };
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_DEV_LINK}/checkin`,
+        `http://localhost:8800/checkin`,
         b
       );
       setShowMessage(true);
@@ -47,7 +47,7 @@ export default function CheckIn() {
     };
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_DEV_LINK}/checkin/custom`,
+        `http://localhost:8800/checkin/custom`,
         b
       );
       setShowMessage(true);
@@ -61,7 +61,7 @@ export default function CheckIn() {
   }
 
   const undo = () => {
-    axios.delete(`${process.env.REACT_APP_DEV_LINK}/undo/checkin/`);
+    axios.delete(`$http://localhost:8800/undo/checkin/`);
   };
 
   const handleUndo = () => {

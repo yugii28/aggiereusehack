@@ -30,7 +30,7 @@ const Update = () => {
             //sending the json object "book"
             //when you do this, it automatically goes to the app.post function in index.js because if you comment that function this doesn't work
             // when you do this, it also updates the sql server, not only localhost
-            await axios.put(`${process.env.REACT_APP_DEV_LINK}/books/`+bookId, book)
+            await axios.put(`http://localhost:8800/books/`+bookId, book)
             // console.log(book);
             //go to homepage once done
             navigate("/")

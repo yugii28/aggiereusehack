@@ -20,7 +20,7 @@ export default function CheckOutTable() {
     const fetchAllCheckOut = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_DEV_LINK}/checkout`
+          `http://localhost:8800/checkout`
         );
         setData(res.data);
         setLoading(false);
@@ -36,7 +36,7 @@ export default function CheckOutTable() {
     const getAllCats = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_DEV_LINK}/checkout/getallcategories`
+          `http://localhost:8800/checkout/getallcategories`
         );
         setCat(res);
       } catch (err) {
@@ -48,7 +48,7 @@ export default function CheckOutTable() {
 
   const deleteItem = (id) => {
     axios
-      .delete(`${process.env.REACT_APP_DEV_LINK}/deletecheckout/${id}`)
+      .delete(`http://localhost:8800/deletecheckout/${id}`)
       .then((response) => {
         setData(
           data.filter((val) => {
@@ -61,7 +61,7 @@ export default function CheckOutTable() {
  
   function getCategory() {
     const imp_data = cat.data.map((dataPoint) => ({
-      y: dataPoint["count(category)"],
+      y: dataPoint["COUNT(category)"],
       x: dataPoint["category"],
     }));
     setmainmageshow((prev) => !prev);
